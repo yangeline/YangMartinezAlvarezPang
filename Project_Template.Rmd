@@ -1,7 +1,7 @@
 ---
 ---
 title:"An Analysis of Energy-Related CO2 Emissions in North Carolina and US."
-author: "Angeline, Gary, Sayra, Miaojun"
+author: "Yin-Chia Yang, Gary Alvarez, Sayra Martinez, Miaojun Pang"
 date: "Spring 2024"
 output:
   html_document:
