@@ -1,3 +1,21 @@
+---
+---
+title:"An Analysis of Energy-Related CO2 Emissions in North Carolina and US."
+author: "Angeline, Gary, Sayra, Miaojun"
+date: "Spring 2024"
+output:
+  html_document:
+    df_print: paged
+geometry: margin=2.54cm
+fig_height: 3
+fig_width: 4
+editor_options:
+  chunk_output_type: console
+---
+------------------------------------------------------------------------
+
+
+```{=tex}
 \newpage
 \tableofcontents 
 \newpage
@@ -5,54 +23,93 @@
 \newpage
 \listoffigures 
 \newpage
+```
 
 ```{r setup, include=FALSE}
 # Set your working directory
+getwd()
 
 # Load your packages
+library(ggplot2)
+library(forecast)
+library(tidyverse)
+library(dplyr)
+library(tidyr)
+library(trend)
+library(zoo)
+library(lubridate)
+library(here)
+library(cowplot)
 
 # Set your ggplot theme
+project_theme <- theme_light(base_size = 12) +
+                theme(axis.text = element_text (color = "green"), legend.position = "bottom")
 
 # Load your datasets
 
-```
+NC_data <- read.csv("../YangMartinezAlvarezPang/NC_Emissions.csv")
 
+
+
+```
 
 # Rationale and Research Questions
 
+Rationale The urgency of climate change, propelled by rising levels of
+CO2 emissions, necessitates a detailed understanding of emission
+sources, patterns, and impact. Energy consumption, particularly the
+burning of fossil fuels for electricity, heat, and transportation, is a
+significant contributor to global CO2 emissions. 
 
+Understanding these emissions on a granular level, such as by state and sector, 
+is critical for developing effective mitigation strategies. North Carolina, like
+many states, faces its unique challenges and opportunities in managing
+CO2 emissions due to its specific industrial activities, energy mix, and
+policy environment. 
+
+Given the vast amount of data available, there's a
+pressing need for analytical tools that can simplify this complexity
+into actionable insights. By leveraging R, a powerful tool for data
+analysis, this project aims to provide a comprehensive analysis of North
+Carolina's CO2 emissions within the wider context of the United States,
+identifying key areas for policy intervention and technological
+innovation.
+
+Research Questions
+
+1.  What are the primary sources of CO2 emissions in North Carolina, and
+    how do these compare with national trends?
+
+2.  Which policies and technologies have contributed to increases or
+    decreases in CO2 emissions within North Carolina, and how can these
+    be applied or modified for better results?
+
+or 2. How do CO2 emissions in North Carolina vary by sector
+(residential, commercial, industrial, and transportation), and what
+trends can be identified over time?
 
 \newpage
 
 # Dataset Information
 
-
-
 \newpage
 
-# Exploratory Analysis 
-
-
+# Exploratory Analysis
 
 \newpage
 
 # Analysis
 
+## Question 1: \<insert specific question here and add additional subsections for additional questions below, if needed\>
 
-
-## Question 1: <insert specific question here and add additional subsections for additional questions below, if needed>
-
-## Question 2: 
-
-
-
+## Question 2:
 
 \newpage
 
 # Summary and Conclusions
 
-
 \newpage
 
 # References
-<add references here if relevant, otherwise delete this section> 
+
+\<add references here if relevant, otherwise delete this section\>
