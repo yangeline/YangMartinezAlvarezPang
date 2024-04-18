@@ -25,6 +25,9 @@ editor_options:
 \newpage
 ```
 
+## github repository
+https://github.com/yangeline/YangMartinezAlvarezPang.git
+
 ```{r setup, include=FALSE}
 # Set your working directory
 getwd()
@@ -46,8 +49,8 @@ project_theme <- theme_light(base_size = 12) +
                 theme(axis.text = element_text (color = "green"), legend.position = "bottom")
 
 # Load your datasets
-
-NC_data <- read.csv("../YangMartinezAlvarezPang/NC_Emissions.csv")
+here()
+NC_Emission <- read.csv("./Data/Raw Data/NC_Emissions.csv", stringsAsFactors = TRUE)
 
 
 
@@ -79,6 +82,9 @@ Research Questions
 
 1.  What are the primary sources of CO2 emissions in North Carolina, and
     how do these compare with national trends?
+```{r}
+
+```
 
 2.  Which policies and technologies have contributed to increases or
     decreases in CO2 emissions within North Carolina, and how can these
