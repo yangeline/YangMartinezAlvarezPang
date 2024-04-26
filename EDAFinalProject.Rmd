@@ -29,10 +29,15 @@ editor_options:
 https://github.com/yangeline/YangMartinezAlvarezPang.git
 
 ```{r setup, include=FALSE}
+knitr::opts_chunk$set(tidy.opts=list(width.cutoff=60), tidy=TRUE)
 # Set your working directory
 getwd()
 
 # Load your packages
+library(rvest)
+library(scales)
+library(dataRetrieval)
+library(tidycensus)
 library(ggplot2)
 library(forecast)
 library(tidyverse)
@@ -43,6 +48,10 @@ library(zoo)
 library(lubridate)
 library(here)
 library(cowplot)
+#install.packages(rio)
+library(rio)
+#install.packages("readxl")
+library(readxl)
 
 # Set your ggplot theme
 project_theme <- theme_light(base_size = 12) +
@@ -50,11 +59,24 @@ project_theme <- theme_light(base_size = 12) +
 
 # Load your datasets
 here()
-NC_Emission <- read.csv("./Data/Raw Data/NC_Emissions.csv", stringsAsFactors = TRUE)
+NC_Emissions <- read_excel("../YangMartinezAlvarezPang/Data/Raw Data/NC_Emissions.xlsx")
+colnames(NC_Emissions) <- NC_Emissions[3, ]
+write.csv(NC_Emissions, "../YangMartinezAlvarezPang/Data/Raw Data/NC_Emissions.csv")
+NC_Emissions_csv <- read.csv("./Data/Raw Data/NC_Emissions.csv", skip = 3, stringsAsFactors = TRUE)
 
+States_Emissions <- read_excel("../YangMartinezAlvarezPang/Data/Raw Data/State Data.xlsx")
+colnames(States_Emissions) <- States_Emissions[4, ]
+write.csv(States_Emissions, "../YangMartinezAlvarezPang/Data/Raw Data/State Data.csv")
+States_Emissions <- read.csv("./Data/Raw Data/State Data.csv", skip = 4, stringsAsFactors = TRUE)
 
+GDP_States <- read.csv("../YangMartinezAlvarezPang/Data/Raw Data/GDP.csv", stringsAsFactors = TRUE)
 
 ```
+# Overview
+
+The Environmental Kuznets Curve (EKC) is the graph representation of the hypothesized relationship between income and environmental degradation as an economy grows. According to it, at early stages of economic growth, degradation, and pollution increase but eventually, the relationship reverts so that at high-income levels economic growth leads to environmental improvement, having an inverted U-shaped (Leal, 2022). Although this idea has been promoted as a method of improving the environment, EKC is not only dependent on economic growth, certain policy measures have to be taken.
+
+![Kuznets Curve](/home/guest/R/YangMartinezAlvarezPang/Data/Kuznets-Curve-1.png)
 
 # Rationale and Research Questions
 
@@ -83,6 +105,75 @@ Research Questions
 1.  What are the primary sources of CO2 emissions in North Carolina, and
     how do these compare with national trends?
 ```{r}
+GDP_States_selected <- GDP_States %>%
+  select(Years, X2021, X2019, X1997) %>%
+  mutate(X2021 = X2021 / 1000000000, X2019 = X2019 / 1000000000, 
+          X1997 =  X1997 / 1000000000) %>%
+  na.omit()
+colnames(GDP_States_selected) <- c("State","GDP 2021 (USD billion)", "GDP 2019 (USD billion)", "GDP 1997 (USD billion)")
+
+Emissions_States_selected <- States_Emissions %>%
+  select(State, X2021, X2019, X1997) %>%
+  na.omit()
+colnames(Emissions_States_selected) <- c("State","Emission 2021", "Emission 2019", "Emission 1997")
+
+# Joinng the data frames
+Joined_StatesGDP_Emission <- merge(GDP_States_selected, Emissions_States_selected, by = "State")
+
+GDP_Emissions_1997plot <-
+  ggplot(Joined_StatesGDP_Emission, aes(x = `GDP 1997 (USD billion)`, y = `Emission 1997`, color = State))+
+  geom_point(alpha=0.2, size= 1) +
+  ggtitle("CO2 Emissions by GDP. US States 1997") + 
+  xlab(expression(paste("GDP (USD billion)"))) +
+  ylab(expression(paste("Co2 Emission"))) +
+  geom_smooth(method = lm)+
+  theme(legend.position = "none")
+print(GDP_Emissions_1997plot)
+
+
+GDP_Emissions_2019plot <-
+  ggplot(Joined_StatesGDP_Emission, aes(x = `GDP 2019 (USD billion)`, y = `Emission 2019`, color = State))+
+ geom_point(alpha=0.2, size= 1) +
+  ggtitle("CO2 Emissions by GDP. US States 2019") + 
+  xlab(expression(paste("GDP (USD billion)"))) +
+  ylab(expression(paste("Co2 Emission"))) +
+  geom_smooth(method = lm)+
+  theme(legend.position = "none")
+print(GDP_Emissions_2019plot)
+
+
+#Plotting with variable Log GDP
+logGDP_States_selected <- GDP_States %>%
+  select(Years, X2021, X2019, X1997) %>%
+  mutate(X2021 = log(X2021), X2019 = log(X2019),
+          X1997 =  log(X1997)) %>%
+  na.omit()
+colnames(logGDP_States_selected) <- c("State","GDP 2021", "GDP 2019", "GDP 1997")
+
+Joined_StatesGDP_Emission2 <- merge(logGDP_States_selected, Emissions_States_selected, by = "State")
+
+logGDP_Emissions_1997plot <- ggplot(Joined_StatesGDP_Emission2, aes(x = `GDP 1997`, y = `Emission 1997`, color = State)) + 
+  geom_point(alpha=0.5, size= 1) + 
+  ylim(0, 250)+
+  ggtitle("CO2 Emissions by GDP. US States 1997") + 
+  xlab(expression(paste("Log GDP"))) + 
+  ylab(expression(paste("Co2 Emission"))) + 
+  geom_smooth(method = "lm", se = FALSE, color = "lightgrey")+
+  theme(legend.position = "none")
+print(logGDP_Emissions_1997plot)
+
+#2019 highlighting NC
+highlight_point <- data.frame(`GDP 2019` = 27.11102, `Emission 2019` = 122.620087)
+
+logGDP_Emissions_2019plot <- ggplot(Joined_StatesGDP_Emission2, aes(x = `GDP 2019`, y = `Emission 2019`, color = State)) + 
+  geom_point(alpha=0.5, size= 1) + 
+  ylim(0, 200)+
+  ggtitle("CO2 Emissions by GDP. US States 2019") + 
+  xlab(expression(paste("Log GDP"))) + 
+  ylab(expression(paste("Co2 Emission"))) + 
+  geom_smooth(method = "lm", se = FALSE, color = "lightgrey")+
+  theme(legend.position = "none") 
+print(logGDP_Emissions_2019plot)
 
 ```
 
