@@ -59,24 +59,81 @@ project_theme <- theme_light(base_size = 12) +
 
 # Load your datasets
 here()
+
+#Datasets for NC Emissions for 1970-2021 (by source)
 NC_Emissions <- read_excel("../YangMartinezAlvarezPang/Data/Raw Data/NC_Emissions.xlsx")
 colnames(NC_Emissions) <- NC_Emissions[3, ]
 write.csv(NC_Emissions, "../YangMartinezAlvarezPang/Data/Raw Data/NC_Emissions.csv")
 NC_Emissions_csv <- read.csv("./Data/Raw Data/NC_Emissions.csv", skip = 3, stringsAsFactors = TRUE)
 
+#Dataset State energy-related carbon dioxide emissions by year (1970–2021)
 States_Emissions <- read_excel("../YangMartinezAlvarezPang/Data/Raw Data/State Data.xlsx")
 colnames(States_Emissions) <- States_Emissions[4, ]
 write.csv(States_Emissions, "../YangMartinezAlvarezPang/Data/Raw Data/State Data.csv")
 States_Emissions <- read.csv("./Data/Raw Data/State Data.csv", skip = 4, stringsAsFactors = TRUE)
 
+#We kept only three years
+State_Emissions_processed <- States_Emissions %>%
+  select(State, X2021, X2019, X1997) %>%
+  na.omit()
+colnames(State_Emissions_processed) <- c("State","Emission 2021", "Emission 2019", "Emission 1997")
+
+#We wanted to visualize the relation between growth (considering the indicator log GDP per capita) and CO2 emissions (taking the data for energy-related carbon dioxide emissions by year). We have the emissions ready to exploit, but once we have the information for GDP, we would need to do some estimations to get the log GDP per capita and make a smoother comparison between our variables.
+
+#1 GDP by state for 1997-2022
 GDP_States <- read.csv("../YangMartinezAlvarezPang/Data/Raw Data/GDP.csv", stringsAsFactors = TRUE)
+
+#2 We kept data only for 3 years and named the columns
+GDP_States_Selectedperiod <- GDP_States %>%
+  select(Years, X2021, X2019, X1997)
+  colnames(GDP_States_Selectedperiod) <- c("State","GDP2021", "GDP2019", "GDP1997")
+
+#3 We got the data for population by state (1997 and 2019), from Fred, following the next steps: 
+#Created the scrapping function 
+scraping <- function(Year) {
+  the_URL <- paste0('https://fred.stlouisfed.org/release/tables?rid=118&eid=259194&od=', Year, '-01-01#')
+  population_website <- read_html(the_URL)
+
+#Scraping data from the given website  
+State <- population_website %>% html_nodes(".fred-rls-elm-nm-td") %>% html_text(trim=T)
+Population <- population_website %>% html_nodes(".fred-rls-elm-nm-td+ .fred-rls-elm-vl-td") %>% html_text(trim=T)
+Year <- population_website %>% html_nodes("#table-unit-subheading1") %>% html_text(trim=T)
+
+#Putting the data into data frame
+StatePopulation_scraping <- data.frame(
+  State = State,
+  Population = Population)
+StatePopulation_scraping
+}
+
+#we extracted the data for 3 years
+StatePop_2021 <- scraping('2021')
+StatePop_2021
+
+StatePop_2019 <- scraping('2019')
+StatePop_2019
+
+StatePop_1997 <- scraping('1997')
+StatePop_1997
+
+# We merged the dataframes and named columns
+StatesPop_1997_2019 <- merge(StatePop_1997, StatePop_2019, by = "State")
+threeYears_StatePop <- merge(StatesPop_1997_2019, StatePop_2021, by = "State")
+colnames(threeYears_StatePop) <- c("State","P1997", "P2019", "P2021")
+
+#We converted the population data into numeric values and cleaned the dataframe
+threeYears_StatePop <- threeYears_StatePop %>% 
+  mutate(Pop1997 = as.numeric(gsub(",", "", P1997)), Pop2019 = as.numeric(gsub(",", "", P2019)), Pop2021 = as.numeric(gsub(",", "", P2021))) %>%
+   mutate(Pop1997 = Pop1997*1000, Pop2019 = Pop2019*1000, Pop2021 = Pop2021*1000)%>%
+select(State, Pop1997, Pop2019, Pop2021)
 
 ```
 # Overview
 
-The Environmental Kuznets Curve (EKC) is the graph representation of the hypothesized relationship between income and environmental degradation as an economy grows. According to it, at early stages of economic growth, degradation, and pollution increase but eventually, the relationship reverts so that at high-income levels economic growth leads to environmental improvement, having an inverted U-shaped (Leal, 2022). Although this idea has been promoted as a method of improving the environment, EKC is not only dependent on economic growth, certain policy measures have to be taken.
+The Environmental Kuznets Curve (EKC) is the graph representation of the hypothesized relationship between income and environmental degradation as an economy grows. According to it, at early stages of economic growth, environmental degradation, and pollution increase but eventually, the relationship reverts so that at high-income levels the economic growth leads to environmental improvement (Leal, 2022). Thus, the EKC has an inverted U-shaped (figure below). Although this idea has been promoted as a method of improving the environment, EKC is not only dependent on economic growth, policy interventions have to be taken for environmental improvement to happen.
 
 ![Kuznets Curve](/home/guest/R/YangMartinezAlvarezPang/Data/Kuznets-Curve-1.png)
+This paper analyzes the North Caroline total CO2 emissions across XXXX-XXXX, and breakdown their main sources. After defining a comparable state in the US in terms of income level, taking GDP per capita as indicator, we would contrast th 
 
 # Rationale and Research Questions
 
@@ -105,77 +162,129 @@ Research Questions
 1.  What are the primary sources of CO2 emissions in North Carolina, and
     how do these compare with national trends?
 ```{r}
-GDP_States_selected <- GDP_States %>%
-  select(Years, X2021, X2019, X1997) %>%
-  mutate(X2021 = X2021 / 1000000000, X2019 = X2019 / 1000000000, 
-          X1997 =  X1997 / 1000000000) %>%
-  na.omit()
-colnames(GDP_States_selected) <- c("State","GDP 2021 (USD billion)", "GDP 2019 (USD billion)", "GDP 1997 (USD billion)")
 
-Emissions_States_selected <- States_Emissions %>%
-  select(State, X2021, X2019, X1997) %>%
-  na.omit()
-colnames(Emissions_States_selected) <- c("State","Emission 2021", "Emission 2019", "Emission 1997")
+States_GDP <- merge(GDP_States_Selectedperiod, threeYears_StatePop, by = "State")
 
-# Joinng the data frames
-Joined_StatesGDP_Emission <- merge(GDP_States_selected, Emissions_States_selected, by = "State")
+#We estimated the LogGDP per capita
+logGDP <- States_GDP %>%
+  mutate(LogGDP1997 =  log(GDP1997), LogGDP2019 = log(GDP2019)) %>%
+  na.omit() %>%
+  select(State, LogGDP1997, LogGDP2019)
 
-GDP_Emissions_1997plot <-
-  ggplot(Joined_StatesGDP_Emission, aes(x = `GDP 1997 (USD billion)`, y = `Emission 1997`, color = State))+
-  geom_point(alpha=0.2, size= 1) +
-  ggtitle("CO2 Emissions by GDP. US States 1997") + 
-  xlab(expression(paste("GDP (USD billion)"))) +
-  ylab(expression(paste("Co2 Emission"))) +
-  geom_smooth(method = lm)+
-  theme(legend.position = "none")
-print(GDP_Emissions_1997plot)
+#We merge the emissions and log gdp per capita datasets
+GDP_Emission1 <- merge(logGDP, State_Emissions_processed, by = "State")%>%
+  select(-"Emission 2021")
+write.csv(GDP_Emission1, "../YangMartinezAlvarezPang/Processed Data/GDP_Emissions1_processed.csv")
 
+#1997 highlighting NC
+highlight_NC1997 <- data.frame( GDP = 26.1783087084697, Co2E = 142.323512728919, State = "North Carolina")
+highlight_Mas1997 <- data.frame( GDP = 26.1924536121054, Co2E = 85.1948682912339, State = "Massachusetts")
 
-GDP_Emissions_2019plot <-
-  ggplot(Joined_StatesGDP_Emission, aes(x = `GDP 2019 (USD billion)`, y = `Emission 2019`, color = State))+
- geom_point(alpha=0.2, size= 1) +
-  ggtitle("CO2 Emissions by GDP. US States 2019") + 
-  xlab(expression(paste("GDP (USD billion)"))) +
-  ylab(expression(paste("Co2 Emission"))) +
-  geom_smooth(method = lm)+
-  theme(legend.position = "none")
-print(GDP_Emissions_2019plot)
-
-
-#Plotting with variable Log GDP
-logGDP_States_selected <- GDP_States %>%
-  select(Years, X2021, X2019, X1997) %>%
-  mutate(X2021 = log(X2021), X2019 = log(X2019),
-          X1997 =  log(X1997)) %>%
-  na.omit()
-colnames(logGDP_States_selected) <- c("State","GDP 2021", "GDP 2019", "GDP 1997")
-
-Joined_StatesGDP_Emission2 <- merge(logGDP_States_selected, Emissions_States_selected, by = "State")
-
-logGDP_Emissions_1997plot <- ggplot(Joined_StatesGDP_Emission2, aes(x = `GDP 1997`, y = `Emission 1997`, color = State)) + 
+logGDP_Emissions_1997plot <- ggplot(GDP_Emission1, aes(x = `LogGDP1997`, y = `Emission 1997`, color = State)) + 
   geom_point(alpha=0.5, size= 1) + 
   ylim(0, 250)+
-  ggtitle("CO2 Emissions by GDP. US States 1997") + 
+  ggtitle("CO2 Emissions by log GDP. US States 1997") + 
   xlab(expression(paste("Log GDP"))) + 
   ylab(expression(paste("Co2 Emission"))) + 
   geom_smooth(method = "lm", se = FALSE, color = "lightgrey")+
-  theme(legend.position = "none")
+  theme(legend.position = "none")+
+  geom_point(data = highlight_NC1997, aes(x = GDP, y = Co2E, color = State), size = 1, shape = 15, color = "red")+
+  geom_label(data = highlight_NC1997, aes(x = GDP+.005, y = Co2E+10, label = "NC"), size = 3)+
+  geom_point(data = highlight_Mas1997, aes(x = GDP, y = Co2E, color = State), size = 1, shape = 15, color = "green")+
+  geom_label(data = highlight_Mas1997, aes(x = GDP-.005, y = Co2E+10, label = "Massachusetts"), size = 3)
 print(logGDP_Emissions_1997plot)
 
-#2019 highlighting NC
-highlight_point <- data.frame(`GDP 2019` = 27.11102, `Emission 2019` = 122.620087)
+```
 
-logGDP_Emissions_2019plot <- ggplot(Joined_StatesGDP_Emission2, aes(x = `GDP 2019`, y = `Emission 2019`, color = State)) + 
+```{r}
+#plotting for log GDP
+#2019 highlighting NC
+highlight_NC2019 <- data.frame( GDP = 27.1110218762549, Co2E = 122.620087452089, State = "North Carolina")
+highlight_Mas2019 <- data.frame( GDP = 27.1032261573, Co2E = 63.3382579574981, State = "Massachusetts")
+
+logGDP_Emissions_2019plot <- ggplot(GDP_Emission1, aes(x = `LogGDP1997`, y = `Emission 1997`, color = State)) + 
   geom_point(alpha=0.5, size= 1) + 
-  ylim(0, 200)+
-  ggtitle("CO2 Emissions by GDP. US States 2019") + 
+  ylim(0, 230)+
+  ggtitle("CO2 Emissions by log GDP. US States 2019") + 
   xlab(expression(paste("Log GDP"))) + 
   ylab(expression(paste("Co2 Emission"))) + 
   geom_smooth(method = "lm", se = FALSE, color = "lightgrey")+
-  theme(legend.position = "none") 
+  theme(legend.position = "none")+
+  geom_point(data = highlight_NC2019, aes(x = GDP, y = Co2E, color = State), size = 1, shape = 15, color = "red")+
+  geom_label(data = highlight_NC2019, aes(x = GDP+.005, y = Co2E+10, label = "NC"), size = 3)+
+  geom_point(data = highlight_Mas2019, aes(x = GDP, y = Co2E, color = State), size = 1, shape = 15, color = "green")+
+  geom_label(data = highlight_Mas2019, aes(x = GDP-.005, y = Co2E+10, label = "Massachusetts"), size = 3)
 print(logGDP_Emissions_2019plot)
 
 ```
+
+```{r}
+#From the dataframes created in the previous chunk, we estimated the log GDP percapita and then plot the CO2 emissions by this indicator, to observe if NC is performing above or below the trendline.
+GDP_percapita <- merge(GDP_States_Selectedperiod, threeYears_StatePop, by = "State")
+
+#We estimated the LogGDP per capita
+logGDP_pc_States <- GDP_percapita %>%
+  mutate(GDP_pc_2021 = GDP2021 / Pop2021, GDP_pc_2019 = GDP2019 / Pop2019, GDP_pc_1997 = GDP1997 / Pop1997) %>%
+  mutate( LogGDP1997 =  log(GDP_pc_1997), LogGDP2019 = log(GDP_pc_2019), 
+          LogGDP2021 = log(GDP_pc_2021)) %>%
+  na.omit() %>%
+  select(State, LogGDP1997, LogGDP2019, LogGDP2021)
+
+#We merge the emissions and log gdp per capita datasets
+StatesGDP_pc_Emission2 <- merge(logGDP_States, State_Emissions_processed, by = "State")
+write.csv(StatesGDP_pc_Emission2, "../YangMartinezAlvarezPang/Processed Data/GDP_pc_Emissions_processed.csv")
+```
+
+```{r}
+#GDP per capita
+#1997 highlighting NC
+highlight_NC1997 <- data.frame( GDP = 10.357451, Co2E = 142.323512728919, State = "North Carolina")
+highlight_Vg1997 <- data.frame( GDP = 10.3718635288353, Co2E = 110.014152192203, State = "Virginia")
+
+logGDP_Emissions_1997plot <- ggplot(StatesGDP_pc_Emission2, aes(x = `LogGDP1997`, y = `Emission 1997`, color = State)) + 
+  geom_point(alpha=0.5, size= 1) + 
+  ylim(0, 150)+
+  xlim(9.9,10.8)+
+  ggtitle("CO2 Emissions by log GDP per capita. US States 1997") + 
+  xlab(expression(paste("Log GDP per capita"))) + 
+  ylab(expression(paste("Co2 Emission"))) + 
+  geom_smooth(method = "lm", se = FALSE, color = "lightgrey")+
+  theme(legend.position = "none")+
+  geom_point(data = highlight_NC1997, aes(x = GDP, y = Co2E, color = State), size = 2, shape = 15, color = "blue")+
+  geom_label(data = highlight_NC1997, aes(x = GDP+.005, y = Co2E-7, label = "NC"), size = 3)+
+  geom_point(data = highlight_Vg1997, aes(x = GDP, y = Co2E, color = State), size = 2, shape = 15, color = "pink")+
+  geom_label(data = highlight_Vg1997, aes(x = GDP-.005, y = Co2E+7, label = "Virginia"), size = 3)
+print(logGDP_Emissions_1997plot)
+
+```
+Both 
+
+
+```{r}
+#GDP per capita
+#2019 highlighting NC
+highlight_NC2019 <- data.frame( GDP = 10.94400, Co2E = 122.620087452089, State = "North Carolina")
+highlight_Vg2019 <- data.frame( GDP = 11.084984106512, Co2E = 106.794625867687, State = "Virginia")
+
+logGDPpc_Emissions_2019plot <- ggplot(StatesGDP_pc_Emission2, aes(x = `LogGDP2019`, y = `Emission 2019`, color = State)) + 
+  geom_point(alpha=0.5, size= 1) + 
+  ylim(0, 150)+
+  xlim(10.7, 11.3)+
+  ggtitle("CO2 Emissions by GDP. US States 2019") + 
+  xlab(expression(paste("Log GDP per capita"))) + 
+  ylab(expression(paste("Co2 Emission"))) + 
+  geom_smooth(method = "lm", se = FALSE, color = "lightgrey")+
+  theme(legend.position = "none")+
+  geom_point(data = highlight_NC2019, aes(x = GDP, y = Co2E, color = State), size = 1, shape = 15, color = "red")+
+  geom_label(data = highlight_NC2019, aes(x = GDP+.005, y = Co2E+10, label = "NC"), size = 3)+
+  geom_point(data = highlight_Vg2019, aes(x = GDP, y = Co2E, color = State), size = 1, shape = 15, color = "green")+
+  geom_label(data = highlight_Vg2019, aes(x = GDP-.005, y = Co2E+10, label = "Virginia"), size = 3)
+print(logGDPpc_Emissions_2019plot)
+
+
+```
+
+
 
 2.  Which policies and technologies have contributed to increases or
     decreases in CO2 emissions within North Carolina, and how can these
