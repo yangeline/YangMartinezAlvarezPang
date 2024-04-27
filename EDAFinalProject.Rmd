@@ -1,16 +1,16 @@
 ---
----
-title:"An Analysis of Energy-Related CO2 Emissions in North Carolina and US."
+title: "An Analysis of Energy-Related CO2 Emissions in North Carolina and US."
 author: "Yin-Chia Yang, Gary Alvarez, Sayra Martinez, Miaojun Pang"
 date: "Spring 2024"
 output:
-  html_document:
+  pdf_document:
     df_print: paged
 geometry: margin=2.54cm
 fig_height: 3
 fig_width: 4
 editor_options:
   chunk_output_type: console
+
 ---
 ------------------------------------------------------------------------
 
@@ -179,7 +179,7 @@ We also define a comparable state in the US in terms of economic growth, taking 
 
 The Environmental Kuznets Curve (EKC) is the graph representation of the hypothesized relationship between income and environmental degradation as an economy grows. According to it, at early stages of economic growth, environmental degradation, and pollution increase but eventually, the relationship reverts so that at high-income levels the economic growth leads to environmental improvement (Leal, 2022). Thus, the EKC has an inverted U-shaped (figure below). Although this idea has been promoted as a method of improving the environment, EKC is not only dependent on economic growth, policy interventions have to be taken for environmental improvement to happen.
 
-![Kuznets Curve](/home/guest/R/YangMartinezAlvarezPang/Data/Kuznets-Curve-1.png)
+![Kuznets Curve](./Data/Kuznets-Curve-1.png)
 
 ```{r}
 
@@ -329,9 +329,9 @@ The Electric power industry and the transportation sector are the main sources o
 
 # Analysis
 
-## Question 1: \<insert specific question here and add additional subsections for additional questions below, if needed\>
+## Question 1: \<What are the primary sources of CO2 emissions in North Carolina, and how do these compare with national trends?\>
 
-## Question 2:
+## Question 2:\<How do CO2 emissions within states with similar GDP growth comapere to North Carolina, and if a stricter state climate policy improves their performence?\>
 
 \newpage
 
