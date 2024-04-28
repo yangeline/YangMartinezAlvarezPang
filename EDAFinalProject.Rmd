@@ -10,7 +10,6 @@ fig_height: 3
 fig_width: 4
 editor_options:
   chunk_output_type: console
-
 ---
 ------------------------------------------------------------------------
 
@@ -445,6 +444,31 @@ print(byfuel_2019_plot)
 
 ```{r}
 State_GDP_ranked <- States_GDP[order(States_GDP$GDP2021, decreasing = TRUE), ]
+
+# Calculate GDP growth rates for 2009 to 2021
+States_GDP$GrowthRate <- (States_GDP$GDP2021 / States_GDP$GDP2009) - 1
+
+# Identify North Carolina's growth rate
+NC_growth_rate <- subset(States_GDP, State == "North Carolina", select = GrowthRate)
+
+# Find states with similar GDP growth rates within a ±5% range
+threshold <- 0.2
+similar_states <- States_GDP$State[States_GDP$GrowthRate >= (NC_growth_rate - threshold) & 
+                                   States_GDP$GrowthRate <= (NC_growth_rate + threshold)]
+
+# Filter emissions data for these states
+similar_states_emissions <- filter(State_Emissions_processed, State %in% similar_states)
+
+# Visualize emissions for similar growth rate states
+emissions_comparison_plot <- ggplot(similar_states_emissions, aes(x = State, y = `Emission 2021`, fill = State)) +
+  geom_bar(stat = "identity", position = position_dodge()) +
+  ggtitle("CO2 Emissions in 2021 for States with GDP Growth Similar to North Carolina") +
+  xlab("State") +
+  ylab("CO2 Emissions in 2021") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Print the plot
+print(emissions_comparison_plot)
 
 ```
 
