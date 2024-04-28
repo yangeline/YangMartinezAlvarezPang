@@ -443,6 +443,12 @@ print(byfuel_2019_plot)
 
 \newpage
 
+```{r}
+State_GDP_ranked <- States_GDP[order(States_GDP$GDP2021, decreasing = TRUE), ]
+
+```
+
+
 # Summary and Conclusions
 
 
