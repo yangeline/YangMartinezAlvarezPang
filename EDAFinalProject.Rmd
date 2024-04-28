@@ -451,7 +451,7 @@ States_GDP$GrowthRate <- (States_GDP$GDP2021 / States_GDP$GDP2009) - 1
 # Identify North Carolina's growth rate
 NC_growth_rate <- subset(States_GDP, State == "North Carolina", select = GrowthRate)
 
-# Find states with similar GDP growth rates within a ±5% range
+# Find states with similar GDP growth rates within a ±20% range
 threshold <- 0.2
 similar_states <- States_GDP$State[States_GDP$GrowthRate >= (NC_growth_rate - threshold) & 
                                    States_GDP$GrowthRate <= (NC_growth_rate + threshold)]
@@ -471,7 +471,7 @@ emissions_comparison_plot <- ggplot(similar_states_emissions, aes(x = State, y =
 print(emissions_comparison_plot)
 
 ```
-
+The chart shows a wide disparity in CO2 emissions among the states, indicating that similar economic growth does not necessarily lead to similar levels of emissions. North Carolina appears to be on the lower end of the emissions spectrum relative to states like Wyoming, which has notably higher emissions. This suggests that North Carolina might be managing its growth in a more emissions-efficient manner compared to the highest emitting states. North Carolina’s position suggests that it is possible to have significant economic growth while maintaining relatively lower CO2 emissions. Investigating the measures that North Carolina has implemented could provide valuable insights into effective strategies for other states. States aiming to reduce their carbon footprint could analyze the energy policies, technological innovations, and regulatory frameworks of lower-emitting states as potential models for sustainable development. States with lower emissions can serve as benchmarks. Understanding their policy frameworks, energy strategies, and technological investments could inform other states’ efforts to decouple economic growth from CO2 emissions.
 
 # Summary and Conclusions
 
