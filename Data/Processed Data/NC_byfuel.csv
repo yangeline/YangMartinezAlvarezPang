@@ -1,0 +1,199 @@
+"","Sector","Type","Year","CO2_Emission"
+"1","Residential Sector","Coal",2009,0
+"2","Residential Sector","Coal",2010,0
+"3","Residential Sector","Coal",2011,0
+"4","Residential Sector","Coal",2012,0
+"5","Residential Sector","Coal",2013,0
+"6","Residential Sector","Coal",2014,0
+"7","Residential Sector","Coal",2015,0
+"8","Residential Sector","Coal",2016,0
+"9","Residential Sector","Coal",2017,0
+"10","Residential Sector","Coal",2018,0
+"11","Residential Sector","Coal",2019,0
+"12","Residential Sector","Petroleum Products",2009,2.16326696666667
+"13","Residential Sector","Petroleum Products",2010,2.37853513333333
+"14","Residential Sector","Petroleum Products",2011,1.8382947
+"15","Residential Sector","Petroleum Products",2012,1.31272174
+"16","Residential Sector","Petroleum Products",2013,1.42725179666667
+"17","Residential Sector","Petroleum Products",2014,1.61399898
+"18","Residential Sector","Petroleum Products",2015,1.82177156333333
+"19","Residential Sector","Petroleum Products",2016,1.57953862
+"20","Residential Sector","Petroleum Products",2017,1.24327144333333
+"21","Residential Sector","Petroleum Products",2018,1.55295950333333
+"22","Residential Sector","Petroleum Products",2019,1.47191887333333
+"23","Residential Sector","Natural Gas",2009,3.57331344333333
+"24","Residential Sector","Natural Gas",2010,4.02601437333333
+"25","Residential Sector","Natural Gas",2011,3.31721837333333
+"26","Residential Sector","Natural Gas",2012,3.04115507666667
+"27","Residential Sector","Natural Gas",2013,3.7453328
+"28","Residential Sector","Natural Gas",2014,4.08225986666667
+"29","Residential Sector","Natural Gas",2015,3.53396472
+"30","Residential Sector","Natural Gas",2016,3.53306525
+"31","Residential Sector","Natural Gas",2017,3.2846528
+"32","Residential Sector","Natural Gas",2018,3.99015474
+"33","Residential Sector","Natural Gas",2019,3.70809153
+"34","Commercial Sector","Coal",2009,0.521435603333333
+"35","Commercial Sector","Coal",2010,0.4786925
+"36","Commercial Sector","Coal",2011,0.411574863333333
+"37","Commercial Sector","Coal",2012,0.317228413333333
+"38","Commercial Sector","Coal",2013,0.338936033333333
+"39","Commercial Sector","Coal",2014,0.37520824
+"40","Commercial Sector","Coal",2015,0.3691325
+"41","Commercial Sector","Coal",2016,0.29888958
+"42","Commercial Sector","Coal",2017,0.26345682
+"43","Commercial Sector","Coal",2018,0.192187636666667
+"44","Commercial Sector","Coal",2019,0.142839106666667
+"45","Commercial Sector","Petroleum Products",2009,1.96874546
+"46","Commercial Sector","Petroleum Products",2010,1.58793275666667
+"47","Commercial Sector","Petroleum Products",2011,1.24262354333333
+"48","Commercial Sector","Petroleum Products",2012,1.20399697
+"49","Commercial Sector","Petroleum Products",2013,0.958431356666666
+"50","Commercial Sector","Petroleum Products",2014,1.20038046333333
+"51","Commercial Sector","Petroleum Products",2015,1.94453325
+"52","Commercial Sector","Petroleum Products",2016,1.89861569333333
+"53","Commercial Sector","Petroleum Products",2017,1.87222361333333
+"54","Commercial Sector","Petroleum Products",2018,1.89601415666667
+"55","Commercial Sector","Petroleum Products",2019,1.85788093333333
+"56","Commercial Sector","Natural Gas",2009,2.79274376333333
+"57","Commercial Sector","Natural Gas",2010,3.03762888
+"58","Commercial Sector","Natural Gas",2011,2.68514224
+"59","Commercial Sector","Natural Gas",2012,2.63431655666667
+"60","Commercial Sector","Natural Gas",2013,2.97193006
+"61","Commercial Sector","Natural Gas",2014,3.25508406666667
+"62","Commercial Sector","Natural Gas",2015,3.01862132
+"63","Commercial Sector","Natural Gas",2016,3.05840964
+"64","Commercial Sector","Natural Gas",2017,2.94449441
+"65","Commercial Sector","Natural Gas",2018,3.15835663
+"66","Commercial Sector","Natural Gas",2019,3.12756301
+"67","Industrial Sector","Coal",2009,2.15848248
+"68","Industrial Sector","Coal",2010,2.18635956
+"69","Industrial Sector","Coal",2011,1.87727481333333
+"70","Industrial Sector","Coal",2012,1.63338127333333
+"71","Industrial Sector","Coal",2013,1.70215756333333
+"72","Industrial Sector","Coal",2014,1.49984945
+"73","Industrial Sector","Coal",2015,1.366794
+"74","Industrial Sector","Coal",2016,1.32780765333333
+"75","Industrial Sector","Coal",2017,1.18333248
+"76","Industrial Sector","Coal",2018,1.03047296
+"77","Industrial Sector","Coal",2019,0.9320025
+"78","Industrial Sector","Petroleum Products",2009,3.2081833010107
+"79","Industrial Sector","Petroleum Products",2010,3.40482133532621
+"80","Industrial Sector","Petroleum Products",2011,2.9945657545049
+"81","Industrial Sector","Petroleum Products",2012,2.58878276350413
+"82","Industrial Sector","Petroleum Products",2013,2.78621322738557
+"83","Industrial Sector","Petroleum Products",2014,2.69268238877233
+"84","Industrial Sector","Petroleum Products",2015,2.6374216162831
+"85","Industrial Sector","Petroleum Products",2016,2.70746589651884
+"86","Industrial Sector","Petroleum Products",2017,2.80771832171391
+"87","Industrial Sector","Petroleum Products",2018,2.76113770121224
+"88","Industrial Sector","Petroleum Products",2019,2.78003990673207
+"89","Industrial Sector","Natural Gas",2009,4.29053934068745
+"90","Industrial Sector","Natural Gas",2010,4.78869004496804
+"91","Industrial Sector","Natural Gas",2011,5.11930620341588
+"92","Industrial Sector","Natural Gas",2012,5.26321067623019
+"93","Industrial Sector","Natural Gas",2013,5.64546761548872
+"94","Industrial Sector","Natural Gas",2014,5.6098082563271
+"95","Industrial Sector","Natural Gas",2015,5.51136798816416
+"96","Industrial Sector","Natural Gas",2016,5.52894592794148
+"97","Industrial Sector","Natural Gas",2017,5.63405896839665
+"98","Industrial Sector","Natural Gas",2018,6.08931241156317
+"99","Industrial Sector","Natural Gas",2019,6.22355316202398
+"100","Transportation Sector","Coal",2009,0
+"101","Transportation Sector","Coal",2010,0
+"102","Transportation Sector","Coal",2011,0
+"103","Transportation Sector","Coal",2012,0
+"104","Transportation Sector","Coal",2013,0
+"105","Transportation Sector","Coal",2014,0
+"106","Transportation Sector","Coal",2015,0
+"107","Transportation Sector","Coal",2016,0
+"108","Transportation Sector","Coal",2017,0
+"109","Transportation Sector","Coal",2018,0
+"110","Transportation Sector","Coal",2019,0
+"111","Transportation Sector","Petroleum Products",2009,47.4430932066667
+"112","Transportation Sector","Petroleum Products",2010,51.8483065833333
+"113","Transportation Sector","Petroleum Products",2011,50.4372233933333
+"114","Transportation Sector","Petroleum Products",2012,48.8713843933333
+"115","Transportation Sector","Petroleum Products",2013,50.3518181833333
+"116","Transportation Sector","Petroleum Products",2014,51.2456756166667
+"117","Transportation Sector","Petroleum Products",2015,52.2220534
+"118","Transportation Sector","Petroleum Products",2016,53.6937264233333
+"119","Transportation Sector","Petroleum Products",2017,54.2316901133333
+"120","Transportation Sector","Petroleum Products",2018,54.9479794966667
+"121","Transportation Sector","Petroleum Products",2019,56.08893301
+"122","Transportation Sector","Natural Gas",2009,0.43182821
+"123","Transportation Sector","Natural Gas",2010,0.43276376
+"124","Transportation Sector","Natural Gas",2011,0.39565152
+"125","Transportation Sector","Natural Gas",2012,0.29414616
+"126","Transportation Sector","Natural Gas",2013,0.22045716
+"127","Transportation Sector","Natural Gas",2014,0.217973433333333
+"128","Transportation Sector","Natural Gas",2015,0.24544949
+"129","Transportation Sector","Natural Gas",2016,0.15338609
+"130","Transportation Sector","Natural Gas",2017,0.18052892
+"131","Transportation Sector","Natural Gas",2018,0.23269818
+"132","Transportation Sector","Natural Gas",2019,0.23021141
+"133","Electric Power Sector","Coal",2009,62.09847336
+"134","Electric Power Sector","Coal",2010,68.86398255
+"135","Electric Power Sector","Coal",2011,57.37218135
+"136","Electric Power Sector","Coal",2012,49.1331417866667
+"137","Electric Power Sector","Coal",2013,45.1125216666667
+"138","Electric Power Sector","Coal",2014,46.009425
+"139","Electric Power Sector","Coal",2015,37.02324967
+"140","Electric Power Sector","Coal",2016,34.8497339666667
+"141","Electric Power Sector","Coal",2017,32.0491817066667
+"142","Electric Power Sector","Coal",2018,29.8790072166667
+"143","Electric Power Sector","Coal",2019,29.34897152
+"144","Electric Power Sector","Petroleum Products",2009,0.207249606666667
+"145","Electric Power Sector","Petroleum Products",2010,0.226499093333333
+"146","Electric Power Sector","Petroleum Products",2011,0.16303386
+"147","Electric Power Sector","Petroleum Products",2012,0.1460558
+"148","Electric Power Sector","Petroleum Products",2013,0.167416736666667
+"149","Electric Power Sector","Petroleum Products",2014,0.375704816666667
+"150","Electric Power Sector","Petroleum Products",2015,0.33793012
+"151","Electric Power Sector","Petroleum Products",2016,0.203561856666667
+"152","Electric Power Sector","Petroleum Products",2017,0.201338756666667
+"153","Electric Power Sector","Petroleum Products",2018,0.5145316
+"154","Electric Power Sector","Petroleum Products",2019,0.14709376
+"155","Electric Power Sector","Natural Gas",2009,2.13351468
+"156","Electric Power Sector","Natural Gas",2010,3.90628890666667
+"157","Electric Power Sector","Natural Gas",2011,4.79066456
+"158","Electric Power Sector","Natural Gas",2012,8.05522230333333
+"159","Electric Power Sector","Natural Gas",2013,10.76056806
+"160","Electric Power Sector","Natural Gas",2014,11.0790799166667
+"161","Electric Power Sector","Natural Gas",2015,14.74845086
+"162","Electric Power Sector","Natural Gas",2016,16.06606859
+"163","Electric Power Sector","Natural Gas",2017,15.25363554
+"164","Electric Power Sector","Natural Gas",2018,17.96807727
+"165","Electric Power Sector","Natural Gas",2019,16.56098873
+"166","Fuel Totals","Coal",2009,64.7783914433333
+"167","Fuel Totals","Coal",2010,71.52903461
+"168","Fuel Totals","Coal",2011,59.6610310266667
+"169","Fuel Totals","Coal",2012,51.0837514733333
+"170","Fuel Totals","Coal",2013,47.1536152633333
+"171","Fuel Totals","Coal",2014,47.88448269
+"172","Fuel Totals","Coal",2015,38.75917617
+"173","Fuel Totals","Coal",2016,36.4764312
+"174","Fuel Totals","Coal",2017,33.4959710066667
+"175","Fuel Totals","Coal",2018,31.1016678133333
+"176","Fuel Totals","Coal",2019,30.4238131266667
+"177","Fuel Totals","Petroleum Products",2009,54.9905385410107
+"178","Fuel Totals","Petroleum Products",2010,59.4460949019929
+"179","Fuel Totals","Petroleum Products",2011,56.6757412511716
+"180","Fuel Totals","Petroleum Products",2012,54.1229416668375
+"181","Fuel Totals","Petroleum Products",2013,55.6911313007189
+"182","Fuel Totals","Petroleum Products",2014,57.128442265439
+"183","Fuel Totals","Petroleum Products",2015,58.9637099496164
+"184","Fuel Totals","Petroleum Products",2016,60.0829084898522
+"185","Fuel Totals","Petroleum Products",2017,60.3562422483806
+"186","Fuel Totals","Petroleum Products",2018,61.6726224578789
+"187","Fuel Totals","Petroleum Products",2019,62.3458664833987
+"188","Fuel Totals","Natural Gas",2009,13.2219394373541
+"189","Fuel Totals","Natural Gas",2010,16.191385964968
+"190","Fuel Totals","Natural Gas",2011,16.3079828967492
+"191","Fuel Totals","Natural Gas",2012,19.2880507728968
+"192","Fuel Totals","Natural Gas",2013,23.3437556954887
+"193","Fuel Totals","Natural Gas",2014,24.2442055396604
+"194","Fuel Totals","Natural Gas",2015,27.0578543781642
+"195","Fuel Totals","Natural Gas",2016,28.3398754979415
+"196","Fuel Totals","Natural Gas",2017,27.2973706383966
+"197","Fuel Totals","Natural Gas",2018,31.4385992315632
+"198","Fuel Totals","Natural Gas",2019,29.850407842024

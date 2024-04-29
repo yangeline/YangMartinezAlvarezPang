@@ -1,0 +1,56 @@
+"","Sector","Year","CO2_Emission"
+"1","Residential Sector",2009,5.73658041
+"2","Residential Sector",2010,6.40454950666667
+"3","Residential Sector",2011,5.15551307333333
+"4","Residential Sector",2012,4.35387681666667
+"5","Residential Sector",2013,5.17258459666667
+"6","Residential Sector",2014,5.69625884666667
+"7","Residential Sector",2015,5.35573628333333
+"8","Residential Sector",2016,5.11260387
+"9","Residential Sector",2017,4.52792424333333
+"10","Residential Sector",2018,5.54311424333333
+"11","Residential Sector",2019,5.18001040333333
+"12","Commercial Sector",2009,5.28292482666667
+"13","Commercial Sector",2010,5.10425413666667
+"14","Commercial Sector",2011,4.33934064666667
+"15","Commercial Sector",2012,4.15554194
+"16","Commercial Sector",2013,4.26929745
+"17","Commercial Sector",2014,4.83067277
+"18","Commercial Sector",2015,5.33228707
+"19","Commercial Sector",2016,5.25591491333333
+"20","Commercial Sector",2017,5.08017484333333
+"21","Commercial Sector",2018,5.24655842333333
+"22","Commercial Sector",2019,5.12828305
+"23","Industrial Sector",2009,9.65720512169815
+"24","Industrial Sector",2010,10.3798709402942
+"25","Industrial Sector",2011,9.99114677125412
+"26","Industrial Sector",2012,9.48537471306765
+"27","Industrial Sector",2013,10.1338384062076
+"28","Industrial Sector",2014,9.80234009509943
+"29","Industrial Sector",2015,9.51558360444726
+"30","Industrial Sector",2016,9.56421947779366
+"31","Industrial Sector",2017,9.62510977011056
+"32","Industrial Sector",2018,9.88092307277541
+"33","Industrial Sector",2019,9.93559556875605
+"34","Transportation Sector",2009,47.8749214166667
+"35","Transportation Sector",2010,52.2810703433333
+"36","Transportation Sector",2011,50.8328749133333
+"37","Transportation Sector",2012,49.1655305533333
+"38","Transportation Sector",2013,50.5722753433333
+"39","Transportation Sector",2014,51.46364905
+"40","Transportation Sector",2015,52.46750289
+"41","Transportation Sector",2016,53.8471125133333
+"42","Transportation Sector",2017,54.4122190333333
+"43","Transportation Sector",2018,55.1806776766667
+"44","Transportation Sector",2019,56.31914442
+"45","Electric Power Sector",2009,64.4392376466667
+"46","Electric Power Sector",2010,72.99677055
+"47","Electric Power Sector",2011,62.32587977
+"48","Electric Power Sector",2012,57.33441989
+"49","Electric Power Sector",2013,56.0405064633333
+"50","Electric Power Sector",2014,57.4642097333333
+"51","Electric Power Sector",2015,52.10963065
+"52","Electric Power Sector",2016,51.1193644133333
+"53","Electric Power Sector",2017,47.5041560033333
+"54","Electric Power Sector",2018,48.3616160866667
+"55","Electric Power Sector",2019,46.05705401
