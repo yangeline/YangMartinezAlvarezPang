@@ -9,7 +9,7 @@ geometry: margin=2.54cm
 fig_height: 3
 fig_width: 4
 editor_options:
-  chunk_output_type: console
+  chunk_output_type: inline
 ---
 ------------------------------------------------------------------------
 
@@ -169,11 +169,11 @@ trends can be identified over time?
 
 # Dataset Information
 
-The analysis of this paper is an attempt to rationalize why despite of having a few fossil fuel resources, no coal production, and being one of the United States' leading nuclear power-producing states, North Carolina ranked 13 in 2021 in total carbon dioxide (CO2) emissions (US Energy Information Administration -EIA-). We used the data for energy-related carbon dioxide emissions by state and their main sources by sector and fossil fuel.
+The analysis of this paper is an attempt to rationalize why despite of having a few fossil fuel resources, no coal production, and being one of the United States' leading nuclear power-producing states, North Carolina ranked 13 in 2021 in total carbon dioxide (CO2) emissions (US Energy Information Administration -EIA-). We used the data for energy-related carbon dioxide emissions by state and their main sources by sector and fossil fuel, which most recent release was October, 2018.
 
 On this regard, the EIA (2023) defines total state CO2 emissions as those that include emissions "from direct fuel use across all sectors, including residential, commercial, industrial, and transportation, as well as primary fuels consumed for electricity generation." On the other hand, energy-related CO2 emissions refers to "emissions released at the location where fossil fuels are combusted". From this information, we would track patterns and define an area of opportunity for the state. We chose the years *2009 and 2019* to analyze changes in emissions' patterns in the decade previous to the Covid-19 pandemic, which could lead to a temporary transformation in the patterns. 
 
-We also define a comparable state in the US in terms of economic growth, taking both Gross domestic product (GDP) and the GDP per capita as indicators, we contrast their emission sources, patterns, and policy interventions, and see how North Carolina performs as Co2 emissioner when considering its economic size. We used the GDP data by state, gathered by USAFacts from the US Bureau of Economic Analysis, while we estimate the State GDP per capita, using that information and the population data was taken from the Federal Reserve Bank of St. Louis (FRED).
+We also define a pair of comparable states in the US in terms of economic growth. To find the most suitable approach for the analysis, we explore the comparison from two perspectives: the first one uses the Gross domestic product (GDP) as indicator, while the second one takes the GDP per capita. In both cases, we see how North Carolina performs as Co2 emissioner when considering its economic size and, then, contrast their emission sources, patterns, and policy interventions. We used the GDP data by state, gathered by USAFacts from the US Bureau of Economic Analysis, while we estimate the State GDP per capita, using that information and the population data was taken from the Federal Reserve Bank of St. Louis (FRED).
 
 | Data | Source| 
 |------:|:-------|
@@ -192,15 +192,11 @@ The Environmental Kuznets Curve (EKC) is the graph representation of the hypothe
 
 Although this idea has been promoted as a method of improving the environment, EKC faces criticism. One of the drawbacks is that the EKC analysis focuses on the domestic production but overlooks consumption of externally produced goods that could impact on the environmental degradation (Leal, 2022: 1). Besides, as EKC attributes the changes solely to economic growth, omits that other factors, such as "green" regulation, and other policy interventions on human capital, renewable energy consumption, e.p., have to be taken for environmental improvement to happen (Wang et al., 2023).
 
-For this paper purposes, we defined a pair of states which, according to their economic size could be comparable to North Carolina. In the first place, we consider the GDP at current prices for 2009, the baseline year for our analysis. We used the log transformations to normalize the distribution. We concluded that Georgia and Virginia could be comparable options, according to the following information:
+Under this idea that mere economic growth does not drive to enviromental improvement, we analyzed the energy-related CO2 emission of North Carolina and two other states with similar economic size, breaking down the emissions sources and sectors, as well as environmental policy intervention. For this purposes, we defined a pair of states which could be comparable to North Carolina, according to their economic size. 
 
-| State| Log GDP| 
-|------:|:-------|
-|Georgia| 26.738 |
-|North Carolina | 26.742 | 
-|Virginia| 26.741 |
+## Comparison through the GDP perspective
 
-From the plot below, we can observe a positive correlation between our variables. Besides, in 2009, while Georgia outperformed the expected level of energy-related CO2 emissions for its economic size, Virginia and North Carolina were below the trendline. 
+For this analysis, we consider the GDP at current prices. 2009 is our baseline year as we aim to review the decade prior to Covid-19 pandemic, and we used the log transformations to normalize the distribution. From the plot below, we can observe a positive correlation between our variables.
 
 ```{r gdp.comparison1, echo= F, error=F, message=FALSE, warning=FALSE, out.height='45%', out.width='65%'}
 
@@ -241,7 +237,17 @@ print(logGDP_Emissions_2009plot)
 
 ```
 
-Despite the general reductions in energy-related CO2 emissions in 2019, North Caroline emitted more CO2 than expected but remained closer to the trendline (figure below). Georgia remained above the trendline.
+Using this indicator, we concluded that Georgia and Virginia could be comparable options, according to the following information:
+
+| State| Log GDP| 
+|------:|:-------|
+|Georgia| 26.738 |
+|North Carolina | 26.742 | 
+|Virginia| 26.741 |
+
+As we observe in the figure above, in 2009, while Georgia outperformed the expected level of energy-related CO2 emissions for its economic size, Virginia and North Carolina were below the trendline. 
+
+In contrast, in 2019, despite the general reductions in energy-related CO2 emissions, North Carolina emitted more CO2 than expected but remained closer to the trendline (figure below). Georgia remained above the trendline.
 
 ```{r gdp.comparison2, echo=F, error=F, message=FALSE, warning=FALSE, out.height='45%', out.width='65%'}
 #plotting for log GDP
@@ -284,7 +290,9 @@ StatesGDP_pc_Emission2 <- merge(logGDP_pc_States, State_Emissions_processed, by 
 write.csv(StatesGDP_pc_Emission2, "../YangMartinezAlvarezPang/Data/Processed Data/GDP_pc_Emissions_processed.csv")
 ```
 
-We also compared by GDP per capita (in log transformation), trying to see how this proxy for living standard translates into improvements in emissions levels. First, we observed that Georgia still results a good comparable, although Wisconsin results more similar according to this economic indicator.
+## Comparison through the GDP per capita perspective
+
+We used GDP per capita (in log transformation), trying to see how this proxy for living standard translates into improvements in emissions levels. First, we observed that Georgia still results a good comparable, although Wisconsin results more similar from a point of view that uses this economic indicator.
 
 | State| Log GDP per capita| 
 |------:|:-------|
@@ -334,7 +342,7 @@ logGDPpc_Emissions_2019plot <- ggplot(StatesGDP_pc_Emission2, aes(x = `LogGDP201
   geom_point(alpha=0.5, size= 1) + 
   ylim(0, 200)+
   xlim(10.5, 11.5)+
-  ggtitle("CO2 Emissions by GDP per capita. US States 2019") + 
+  ggtitle("CO2 Emissions by log GDP per capita. US States 2019") + 
   xlab(expression(paste("Log GDP per capita"))) + 
   ylab(expression(paste("Co2 Emission"))) + 
   geom_smooth(method = "lm", se = FALSE, color = "lightgrey")+
@@ -353,13 +361,13 @@ print(logGDPpc_Emissions_2019plot)
 
 # Analysis
 
-Based on the relation between CO2 emissions and GDP established in the previous section, we could observe that, even though there were reductions from 2009 to 2019, North Carolina energy-related emissions are above the expected levels for an economy of its size. To look for opportunity areas we aim to analyze the main source and type of combusted fuels within the state, and later compare with Georgia's patterns, as this latter resulted comparable both by GDP and GDP per capita in the previous section.
+Based on the relation between CO2 emissions and GDP -which shows a higher correlation than GDP per capita-, we could observe that, even though there were reductions from 2009 to 2019, North Carolina energy-related emissions are above the expected levels for an economy of its size. To look for opportunity areas we aim to analyze the main source and type of combusted fuels within the state, and later compare with Georgia and Virginia's patterns, as these latter resulted comparable by GDP in the previous section.
 
 We should take into account that, according to its state's profile published by EIA, North Carolina consumes around four times more energy than it produces. Thus, the EIA's data can only give an insight on the emissions that derive from domestic production (combusted fuels within the state), but its contribution to CO2 emissions would be greater if those derived from its overall consumption were considered, depending on the type of energy that consumes from other state's production.  
 
 Notwithstanding, from the available data, we focus on the CO2 emissions from fuels combusted within the state (production).
 
-## Question 1: \<What are the primary sources of CO2 emissions in North Carolina, and how do these compare with national trends?\>
+## Question 1: \<What are the primary sources of CO2 emissions in North Carolina?\>
 
 From the figure below, we can observe that electric power sector (yellow) and the transportation sector (pink) are the main sources of CO2 emissions in NC, highly above the emissions from residential, commercial and industrial sector. It is worth noting that although the electric power sector shows a downwarding trend in its emissions levels, the transportation sector -in the contrary- has been increasing its emissions.
 
@@ -377,10 +385,12 @@ NC_Emissions_long <- NC_Emissions_bysector %>%
   pivot_longer(-Sector, names_to = "Year", values_to = "CO2_Emission") %>%
   mutate(Year = as.numeric(gsub("X", "", Year)))
 
+write.csv(NC_Emissions_long, "../YangMartinezAlvarezPang/Data/Processed Data/NC_bysector.csv")
+
 # Ploting the the data
 Evol_Emissions_bysector_NC <- ggplot(NC_Emissions_long, aes(x = Year, y = CO2_Emission, color = Sector)) +
   geom_line() +
-  ggtitle("Total CO2 Emissions by sector. 2009-2019") +
+  ggtitle("North Carolina. Total CO2 Emissions by sector. 2009-2019") +
   labs(x = "Year", y = "Total CO2 Emissions", color = "Sector") +
   scale_x_continuous(breaks = seq(2009, 2019, 1), labels = function(x) format(x, nsmall = 0))+
   theme(legend.position =  "bottom",
@@ -394,7 +404,7 @@ The EIA explains that truckers who use motor gasoline and diesel fuel on NC heav
 
 The figures below breaks down each sector's CO2 emission by fuel type. The increase in Co2 emissions from the transportation sector, is driven by the raise in petroleum products. We can observe as well in the bar graph for 2019, that transportations makes a very limited use of other fuel types. In the case of the electric power sector, there is still an opportunity area for reducing the use of coal.
 
-```{r Emission.byfuel, fig.height=10, fig.width=10, echo=F, error=F, message=FALSE, warning=F}
+```{r NC.Emission.byfuel, fig.height=10, fig.width=10, echo=F, error=F, message=FALSE, warning=F}
 NC_Emissions_csv$Sector <- factor(NC_Emissions_csv$Sector, levels = c("Commercial Sector", "Industrial Sector", "Residential Sector", "Transportation Sector", "Electric Power Sector", "Fuel Totals"))
 
 NC_Emissions_byfuel <- NC_Emissions_csv %>%
@@ -404,11 +414,14 @@ select(Sector, Type, X2009:X2019) %>%
     pivot_longer(-c(Sector, Type), names_to = "Year", values_to = "CO2_Emission") %>%
   mutate(Year = as.numeric(gsub("X", "", Year)))
 
+write.csv(NC_Emissions_byfuel, "../YangMartinezAlvarezPang/Data/Processed Data/NC_byfuel.csv")
+
+
 # Ploting the the data
 Evol_Co2_byfuel_NC <- ggplot(NC_Emissions_byfuel, aes(x = Year, y = CO2_Emission, color = Type)) +
   geom_line() +
   facet_wrap(vars(Sector), ncol = 2, scales = "free_y")+
-  ggtitle("CO2 Emissions in each Sector by fuel type. 2009-2019") +
+  ggtitle("North Carolina. CO2 Emissions in each Sector by fuel type. 2009-2019") +
   labs(x = "Year", y = "CO2 Emissions", color = "Type") +
   scale_x_continuous(breaks = seq(2009, 2019, 1), labels = function(x) format(x, nsmall = 0))+
   theme(legend.position =  "bottom",
@@ -418,8 +431,6 @@ Evol_Co2_byfuel_NC <- ggplot(NC_Emissions_byfuel, aes(x = Year, y = CO2_Emission
         axis.text.x = element_text(angle = 90, hjust = 1)) 
 print(Evol_Co2_byfuel_NC)
 
-```
-```{r}
 NC_Emissions_byfuel_2019 <- NC_Emissions_byfuel  %>%
   filter(Year == 2019) 
 
@@ -431,9 +442,8 @@ byfuel_2019_plot <- ggplot(NC_Emissions_byfuel_2019, aes(x = Type, y = CO2_Emiss
   theme(legend.position = "top",
         axis.text.x = element_text(angle = 90, hjust = 1))+
   facet_wrap(~Sector)+
-  ggtitle("CO2 Emissions by fuel type in 2019")
+  ggtitle("North Carolina. CO2 Emissions by fuel type in 2019")
 print(byfuel_2019_plot)
-
 
 ```
 
@@ -441,6 +451,265 @@ print(byfuel_2019_plot)
 ## Question 2:\<How do CO2 emissions within states with similar GDP growth compare to North Carolina, and if a stricter state climate policy improves their performence?\>
 
 \newpage
+
+```{r, GDP.CO2.comparables, echo=F, error=F, message=FALSE, warning=F}
+
+State_GDP_ranked <- States_GDP[order(States_GDP$GDP2019, decreasing = TRUE), ]
+
+# Calculate GDP growth rates for 2009 to 2019
+States_GDP$GrowthRate <- (States_GDP$GDP2019 / States_GDP$GDP2009) - 1
+
+# Identify North Carolina's growth rate
+NC_growth_rate <- subset(States_GDP, State == "North Carolina", select = GrowthRate)
+
+# Find states with similar GDP growth rates within a ±20% range
+threshold <- 0.2
+similar_states <- States_GDP$State[States_GDP$GrowthRate >= (NC_growth_rate - threshold) & 
+                                   States_GDP$GrowthRate <= (NC_growth_rate + threshold)]
+
+# Filter emissions data for these states
+similar_states_emissions <- filter(State_Emissions_processed, State %in% similar_states)
+
+# Visualize emissions for similar growth rate states
+emissions_comparison_plot <- ggplot(similar_states_emissions, aes(x = State, y = `Emission 2019`, fill = State)) +
+  geom_bar(stat = "identity", position = position_dodge()) +
+  ggtitle("CO2 Emissions in 2019 by State and by GDP") +
+  xlab("State") +
+  ylab("CO2 Emissions in 2019") +
+  theme(legend.position="none")+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1
+                                   ))
+
+# Print the plot
+print(emissions_comparison_plot)
+
+```
+The chart shows a wide disparity in CO2 emissions among the states, indicating that similar economic growth does not necessarily lead to similar levels of emissions. North Carolina appears to be on the lower end of the emissions spectrum relative to states like Georgia and Virginia, which has notably higher emissions. This suggests that North Carolina might be managing its growth in a more emissions-efficient manner compared to the highest emitting states. North Carolina’s position suggests that it is possible to have significant economic growth while maintaining relatively lower CO2 emissions. Investigating the measures that North Carolina has implemented could provide valuable insights into effective strategies for other states. States aiming to reduce their carbon footprint could analyze the energy policies, technological innovations, and regulatory frameworks of lower-emitting states as potential models for sustainable development. States with lower emissions can serve as benchmarks. Understanding their policy frameworks, energy strategies, and technological investments could inform other states’ efforts to decouple economic growth from CO2 emissions.
+
+```{r, echo=F, error=F, message=FALSE, warning=F}
+
+
+# Filter and merge the 2019 data for only North Carolina, Georgia, and Virginia
+selected_data <- States_GDP %>%
+  filter(State %in% c("North Carolina", "Georgia", "Virginia")) %>%
+  select(State, GDP2019) %>%
+  inner_join(State_Emissions_processed %>%
+               filter(State %in% c("North Carolina", "Georgia", "Virginia")) %>%
+               select(c(1, 3)),
+             by = "State")
+
+colnames(selected_data)[3] <- 'Emission2019'
+
+
+# Normalize the GDP data for visual comparison
+max_emission <- max(selected_data$Emission2019, na.rm = TRUE)
+max_gdp <- max(selected_data$GDP2019, na.rm = TRUE)
+selected_data$GDP2019_norm <- selected_data$GDP2019 / max_gdp * max_emission
+
+# Create the plot
+comparative_plot <- ggplot(selected_data, aes(x = State)) +
+  geom_point(aes(y = Emission2019, color = State), size = 5, shape = 18) +
+  geom_point(aes(y = GDP2019_norm, color = State), size = 5, shape = 17) +
+  scale_y_continuous(
+    name = "CO2 Emissions in 2019 (MT)",
+    sec.axis = sec_axis(~ . / max_emission * max_gdp, name = "GDP in 2019")
+  ) +
+  ggtitle("Comparison of GDP and CO2 Emissions for 2019") +
+  xlab("State") +
+  ylab("CO2 Emissions (MT) & Normalized GDP") +
+  scale_color_manual(values = c("North Carolina" = "blue", "Georgia" = "red", "Virginia" = "green")) +
+  theme_minimal() +
+  theme(
+    legend.position = "top",
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(size = 16, face = "bold"),
+    plot.subtitle = element_text(size = 12),
+    axis.title = element_text(size = 14)
+  )
+
+# Display the plot
+print(comparative_plot)
+
+```
+As shown in the graph above, we can see that, in 2019, Georgia had the highest GDP and CO2 emissions among the three states, followed by North Carolina, and Virginia had the lowest GDP and CO2 emissions. 
+Having drawn comparison in economic well-being and energy-related CO2 emissions between North Carolina, Virginia and Georgia, we will now look at the difference approaches of their climate policies.
+
+To briefly compare policy landscape between these states, we will be looking at three parts, whether they have Green House Gas (GHG) emission goals, Climate Action Plans, and how strictly have they been implemented. States that had their Green House Gas (GHG) emission goals written into statue, will be considered to be a more strict policy, and if a state only listed as an executive goal.
+
+```{r, Ge.bysector, echo=F, error=F, message=FALSE, warning=F}
+
+#Setting database for Georgia
+Georgia_Emissions <- read_excel("../YangMartinezAlvarezPang/Data/Raw Data/Georgia_CO2.xlsx")
+colnames(Georgia_Emissions) <- Georgia_Emissions[3, ]
+Georgia_Emissions <- Georgia_Emissions[-(1:3), ]
+write.csv(Georgia_Emissions, "../YangMartinezAlvarezPang/Data/Raw Data/Georgia_Emissions.csv")
+Georgia_Emissions <- read.csv("./Data/Raw Data/Georgia_Emissions.csv", stringsAsFactors = TRUE)
+
+Georgia_Emissions_bysector <- Georgia_Emissions %>%
+  mutate(Type = str_trim(Type)) %>%
+  filter(Type == "Total") %>%
+select(Sector, Type, X2009:X2019) %>%
+  select(-Type) %>%
+  filter(Sector != "Fuel Totals") %>%
+  pivot_longer(-Sector, names_to = "Year", values_to = "CO2_Emission") %>%
+  mutate(Year = as.numeric(gsub("X", "", Year)))
+
+write.csv(Georgia_Emissions_bysector, "../YangMartinezAlvarezPang/Data/Processed Data/Georgia_bysector.csv")
+
+# Ploting the the data
+Evol_CO2_bysector_Ge <- ggplot(Georgia_Emissions_bysector, aes(x = Year, y = CO2_Emission, color = Sector)) +
+  geom_line() +
+  ggtitle("Georgia. Total CO2 Emissions by sector. 2009-2019") +
+  labs(x = "Year", y = "Total CO2 Emissions", color = "Sector") +
+  scale_x_continuous(breaks = seq(2009, 2019, 1), labels = function(x) format(x, nsmall = 0))+
+  theme(legend.position =  "bottom",
+        legend.direction =  "horizontal",
+        legend.key.size = unit(0.5, "cm"), 
+        legend.text = element_text(size = 6)) +
+  scale_color_discrete(labels = c("Commercial", "Electric Power", "Industrial", "Residential", "Transportation"))
+print(Evol_CO2_bysector_Ge)
+```
+In Georgia, similarly to North Carolina breakdowns by sector, we observe that transportation and electric power sector are the main responsible of state CO2 emissions. Notwithstanding, in this case, while the electric power industry has been reducing its emissions levels, the transportation showed little variation in the analyzed decade.
+
+```{r, Georgia.byfuel, fig.height=10, fig.width=10, echo=F, error=F, message=FALSE, warning=F}
+
+Georgia_Emissions$Sector <- factor(Georgia_Emissions$Sector, levels = c("Commercial Sector", "Industrial Sector", "Residential Sector", "Transportation Sector", "Electric Power Sector", "Fuel Totals"))
+
+Georgia_Emissions_byfuel <- Georgia_Emissions %>%
+  mutate(Type = str_trim(Type)) %>%
+  filter(Type != "Total") %>%
+select(Sector, Type, X2009:X2019) %>%
+    pivot_longer(-c(Sector, Type), names_to = "Year", values_to = "CO2_Emission") %>%
+  mutate(Year = as.numeric(gsub("X", "", Year)))
+
+write.csv(Georgia_Emissions_byfuel, "../YangMartinezAlvarezPang/Data/Processed Data/Georgia_byfuel.csv")
+
+# Ploting the the data
+Evol_Co2_byfuel_Ge <- ggplot(Georgia_Emissions_byfuel, aes(x = Year, y = CO2_Emission, color = Type)) +
+  geom_line() +
+  facet_wrap(vars(Sector), ncol = 2, scales = "free_y")+
+  ggtitle("Georgia. CO2 Emissions in each Sector by fuel type. 2009-2019") +
+  labs(x = "Year", y = "CO2 Emissions", color = "Type") +
+  scale_x_continuous(breaks = seq(2009, 2019, 1), labels = function(x) format(x, nsmall = 0))+
+  theme(legend.position =  "bottom",
+        legend.direction =  "horizontal",
+        legend.key.size = unit(0.5, "cm"), 
+        legend.text = element_text(size = 9),
+        axis.text.x = element_text(angle = 90, hjust = 1)) 
+print(Evol_Co2_byfuel_Ge)
+
+```
+In general, Georgia is increasing its use of natural gas in a more accelerated way than North Carolina.
+
+```{r, Virginia.bysector, echo=F, error=F, message=FALSE, warning=F}
+
+#Setting database for Georgia
+Virginia_Emissions <- read_excel("../YangMartinezAlvarezPang/Data/Raw Data/Virginia_CO2.xlsx")
+colnames(Virginia_Emissions) <- Virginia_Emissions[3, ]
+Virginia_Emissions <- Virginia_Emissions[-(1:3), ]
+write.csv(Virginia_Emissions, "../YangMartinezAlvarezPang/Data/Raw Data/Virginia_Emissions.csv")
+Virginia_Emissions <- read.csv("./Data/Raw Data/Virginia_Emissions.csv", stringsAsFactors = TRUE)
+
+Virginia_Emissions_bysector <- Virginia_Emissions %>%
+  mutate(Type = str_trim(Type)) %>%
+  filter(Type == "Total") %>%
+select(Sector, Type, X2009:X2019) %>%
+  select(-Type) %>%
+  filter(Sector != "Fuel Totals") %>%
+  pivot_longer(-Sector, names_to = "Year", values_to = "CO2_Emission") %>%
+  mutate(Year = as.numeric(gsub("X", "", Year)))
+
+write.csv(Virginia_Emissions_bysector, "../YangMartinezAlvarezPang/Data/Processed Data/Virginia_bysector.csv")
+
+# Ploting the the data
+Evol_CO2_bysector_Vi <- ggplot(Virginia_Emissions_bysector, aes(x = Year, y = CO2_Emission, color = Sector)) +
+  geom_line() +
+  ggtitle("Virginia. Total CO2 Emissions by sector. 2009-2019") +
+  labs(x = "Year", y = "Total CO2 Emissions", color = "Sector") +
+  scale_x_continuous(breaks = seq(2009, 2019, 1), labels = function(x) format(x, nsmall = 0))+
+  theme(legend.position =  "bottom",
+        legend.direction =  "horizontal",
+        legend.key.size = unit(0.5, "cm"), 
+        legend.text = element_text(size = 6)) +
+  scale_color_discrete(labels = c("Commercial", "Electric Power", "Industrial", "Residential", "Transportation"))
+print(Evol_CO2_bysector_Vi)
+```
+In Virginia...
+
+```{r, Vi.Emission.byfuel, fig.height=10, fig.width=10, echo=F, error=F, message=FALSE, warning=F}
+
+Virginia_Emissions$Sector <- factor(Virginia_Emissions$Sector, levels = c("Commercial Sector", "Industrial Sector", "Residential Sector", "Transportation Sector", "Electric Power Sector", "Fuel Totals"))
+
+Virginia_Emissions_byfuel <- Virginia_Emissions %>%
+  mutate(Type = str_trim(Type)) %>%
+  filter(Type != "Total") %>%
+select(Sector, Type, X2009:X2019) %>%
+    pivot_longer(-c(Sector, Type), names_to = "Year", values_to = "CO2_Emission") %>%
+  mutate(Year = as.numeric(gsub("X", "", Year)))
+
+write.csv(Virginia_Emissions_byfuel, "../YangMartinezAlvarezPang/Data/Processed Data/Virginia_byfuel.csv")
+
+# Ploting the the data
+Evol_Co2_byfuel_Vi <- ggplot(Virginia_Emissions_byfuel, aes(x = Year, y = CO2_Emission, color = Type)) +
+  geom_line() +
+  facet_wrap(vars(Sector), ncol = 2, scales = "free_y")+
+  ggtitle("Virginia. CO2 Emissions in each Sector by fuel type. 2009-2019") +
+  labs(x = "Year", y = "CO2 Emissions", color = "Type") +
+  scale_x_continuous(breaks = seq(2009, 2019, 1), labels = function(x) format(x, nsmall = 0))+
+  theme(legend.position =  "bottom",
+        legend.direction =  "horizontal",
+        legend.key.size = unit(0.5, "cm"), 
+        legend.text = element_text(size = 9),
+        axis.text.x = element_text(angle = 90, hjust = 1)) 
+print(Evol_Co2_byfuel_Vi)
+```
+
+**Virginia — the most strict**
+
+- GHG Emission goals:
+
+Virginia enacted a statutory target (Senate Bill 94) in 2020 to achieve net-zero GHG emissions across all sectors by 2045.  It also includes other aspects addressing climate change and the health, welfare, and safety of Virginians, including energy efficiency, distributed energy, mitigating the negative impacts of climate change and the energy transition on disadvantaged communities and prioritizing investment in these communities, ensuring reliability, among other topics.
+
+- Climate Action Plan:
+
+2022 Virginia Energy Plan focuses on achieving four objectives of Lower Cost of Living, Job Creation, Bringing People to Virginia, and an “All-of-the-Above” Approach to Energy Policy informed by energy affordability, reliability, capacity, competition, environmental stewardship, choice and innovation. 
+
+- Policy & Legislative effort:
+
+The Virginia Clean Economy Act establishes renewable portfolio and energy efficiency standards, and advances offshore wind and solar generation, and the Clean Energy and Community Flood Preparedness Act addresses resiliency issues.
+The 2022 Plan found that Virginia has had a dramatic shift in electricity generation over the last ten years and is continuing to strive to reduce GHG emissions from the electric power sector as demonstrated by the state’s 2019 energy production targets and strategies to meet the targets outlined in VCEA. 
+Virginia has also passed a number of recent bills to support climate actions, including the Clean Cars Act (House Bill 1965 of 2021).
+
+
+**North Carolina — moderate**
+
+- GHG Emission goals: 
+
+North Carolina set an executive target in 2022 to reduce GHG emissions 50% below 2005 levels by 2030, and to reach net-zero GHG emissions as soon as possible but no later than 2050.
+
+- Climate Action Plan:
+
+In Executive Order 80,*North Carolina's Commitment to Address Climate Change and Transition to a Clean Energy Economy*, Governor Roy Cooper laid out a series of goals for the state to strive to accomplish by 2025:
+
+  - Reduce statewide greenhouse gas emissions to 40% below 2005 levels
+  - Increase the number of registered, zero-emission vehicles (ZEVs) to at least 80,000
+  - Reduce energy consumption per square foot in state-owned buildings by at least 40% from fiscal year 2002-2003 levels
+
+EO80 creates the Climate Change Interagency Council to help the cabinet agencies work together to achieve those goals.
+
+
+**Georgia — the least strict**
+
+- GHG Emission goals: 
+
+Currently, along with other 24 states, Georgia doesn’t have a state-level target or mandate to reduce emissions.
+
+- Climate Action Plan: 
+
+They are developing their first road map to address climate change with $3 million grant support from the federal Environmental Protection Agency (EPA). The state’s priority plan is due in March, 2024, with the full plan due a year later.
+
+
+At the glance, we can conclude that with less strict climate policies, or not even having one, is a major reason that the State of Georgia's economy were able to develop with less restrictions on CO2 emissions. On the other hand, even though Virginia's statutory target (Senate Bill 94) for Net-Zero was passed in 2020, considering the time needed for a bill to move forward in the legislative system, we can safely assume that there has been awareness and consensus across legislative and industrial representatives to address climate change in 2019.
 
 # Summary and Conclusions
 
@@ -462,5 +731,3 @@ Leal, P. H., & Marques, A. C. (2022). The evolution of the environmental Kuznets
 USAFacts (n.d.) Gross domestic product (GDP) by state. Retrieved on April 25, 2024 from: https://usafacts.org/metrics/gross-domestic-product-gdp-by-state/?adjustment=None&timeGranularity=Yearly
 
 Wang, Q., et al. (2023). Revisiting the environmental kuznets curve hypothesis in 208 counties: The roles of trade openness, human capital, renewable energy and natural resource rent. Environmental Research, 216, 114637. https://doi.org/10.1016/j.envres.2022.114637
-
-
