@@ -519,10 +519,59 @@ comparative_plot <- ggplot(selected_data, aes(x = State)) +
 # Display the plot
 print(comparative_plot)
 
-
-
-
 ```
+As shown in the graph above, we can see that, in 2019, Georgia had the highest GDP and CO2 emissions among the three states, followed by North Carolina, and Virginia had the lowest GDP and CO2 emissions. 
+Having drawn comparison in economic well-being and energy-related CO2 emissions between North Carolina, Virginia and Georgia, we will now look at the difference approaches of their climate policies.
+
+To breifly compare policy landscape between these states, we will be looking at three parts, whether they have Green House Gas (GHG) emission goals, Climate Action Plans, and how strictly have they been implemented. States that had their Green House Gas (GHG) emission goals written into statue, will be considered to be a more strict policy, and if a state only listed as an executive goal.
+
+
+**Virginia — the most strict**
+
+- GHG Emission goals:
+
+Virginia enacted a statutory target (Senate Bill 94) in 2020 to achieve net-zero GHG emissions across all sectors by 2045.  It also includes other aspects addressing climate change and the health, welfare, and safety of Virginians, including energy efficiency, distributed energy, mitigating the negative impacts of climate change and the energy transition on disadvantaged communities and prioritizing investment in these communities, ensuring reliability, among other topics.
+
+- Climate Action Plan:
+
+2022 Virginia Energy Plan focuses on achieving four objectives of Lower Cost of Living, Job Creation, Bringing People to Virginia, and an “All-of-the-Above” Approach to Energy Policy informed by energy affordability, reliability, capacity, competition, environmental stewardship, choice and innovation. 
+
+- Policy & Legislative effort:
+
+The Virginia Clean Economy Act establishes renewable portfolio and energy efficiency standards, and advances offshore wind and solar generation, and the Clean Energy and Community Flood Preparedness Act addresses resiliency issues.
+The 2022 Plan found that Virginia has had a dramatic shift in electricity generation over the last ten years and is continuing to strive to reduce GHG emissions from the electric power sector as demonstrated by the state’s 2019 energy production targets and strategies to meet the targets outlined in VCEA. 
+Virginia has also passed a number of recent bills to support climate actions, including the Clean Cars Act (House Bill 1965 of 2021).
+
+
+**North Carolina — moderate**
+
+- GHG Emission goals: 
+
+North Carolina set an executive target in 2022 to reduce GHG emissions 50% below 2005 levels by 2030, and to reach net-zero GHG emissions as soon as possible but no later than 2050.
+
+- Climate Action Plan:
+
+In Executive Order 80,*North Carolina's Commitment to Address Climate Change and Transition to a Clean Energy Economy*, Governor Roy Cooper laid out a series of goals for the state to strive to accomplish by 2025:
+
+  - Reduce statewide greenhouse gas emissions to 40% below 2005 levels
+  - Increase the number of registered, zero-emission vehicles (ZEVs) to at least 80,000
+  - Reduce energy consumption per square foot in state-owned buildings by at least 40% from fiscal year 2002-2003 levels
+
+EO80 creates the Climate Change Interagency Council to help the cabinet agencies work together to achieve those goals.
+
+
+**Georgia — the least strict**
+
+- GHG Emission goals: 
+
+Currently, along with other 24 states, Georgia doesn’t have a state-level target or mandate to reduce emissions.
+
+- Climate Action Plan: 
+
+They are developing their first road map to address climate change with $3 million grant support from the federal Environmental Protection Agency (EPA). The state’s priority plan is due in March, 2024, with the full plan due a year later.
+
+
+At the glance, we can conclude that with less strict climate policies, or not even having one, is a major reason that the State of Georgia's economy were able to develop with less restrictions on CO2 emissions. On the other hand, even though Virginia's statutory target (Senate Bill 94) for Net-Zero was passed in 2020, considering the time needed for a bill to move forward in the legislative system, we can safely assume that there has been awareness and consensus across legislative and industrial representatives to address climate change in 2019.
 
 # Summary and Conclusions
 
