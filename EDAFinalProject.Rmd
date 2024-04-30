@@ -621,7 +621,7 @@ Evol_CO2_bysector_Vi <- ggplot(Virginia_Emissions_bysector, aes(x = Year, y = CO
   scale_color_discrete(labels = c("Commercial", "Electric Power", "Industrial", "Residential", "Transportation"))
 print(Evol_CO2_bysector_Vi)
 ```
-In Virginia, similar to Georgia's and North Carolina's breakdown by sector, we observe that the transportation and electric power sectors are the main contributors to state CO2 emissions. The transportation sector has been showing a steady but small growth over the decade, while electric power has remained stagnant, with minor peaks and valleys and an aparent decline from 2016 to 2019.
+In Virginia, similar to Georgia's and North Carolina's breakdown by sector, we observe that the transportation and electric power sectors are the main contributors to state CO2 emissions. The transportation sector has been showing a steady but small growth over the decade, while electric power has remained stagnant, with minor peaks and valleys and an apparent decline from 2016 to 2019.
 
 ```{r, Vi.Emission.byfuel, fig.cap="Virginia. CO2 Emissions in each Sector by fuel type. 2009-2019", fig.align='center',fig.height=10, fig.width=10, echo=F, error=F, message=FALSE, warning=F}
 
