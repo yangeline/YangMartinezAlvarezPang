@@ -70,7 +70,7 @@ State_Emissions_processed <- States_Emissions %>%
   na.omit()
 colnames(State_Emissions_processed) <- c("State","Emission 2009", "Emission 2019", "Emission 2021")
 
-## We wanted to visualize the relation between growth (considering the indicator log GDP per capita) and CO2 emissions (taking the data for energy-related carbon dioxide emissions by year). We have the emissions ready to exploit, but once we have the information for GDP, we would need to do some estimations to get the log GDP per capita and make a smoother comparison between our variables.
+## We wanted to visualize the relation between growth (considering the indicator log GDP per capita) and CO2 emissions (taking the data for energy-related carbon dioxide emissions by year). We have the emissions ready to use, but once we have the information for GDP, we would need to do some estimations to get the log GDP per capita and make a smoother comparison between our variables.
 
 ###1 GDP by state for 1997-2022
 GDP_States <- read.csv("../YangMartinezAlvarezPang/Data/Raw Data/GDP.csv", stringsAsFactors = TRUE)
@@ -80,13 +80,13 @@ GDP_States_Selectedperiod <- GDP_States %>%
   select(Years, X2021, X2019, X2009)
   colnames(GDP_States_Selectedperiod) <- c("State","GDP2021", "GDP2019", "GDP2009")
 
-###3 We got the data for population by state (2009 and 2019), from Fred, following the next steps: 
+###3 We got the data for population by state (2009 and 2019), from the Federal Reserve Economic Data source (FRED), following the next steps: 
 ####Created the scrapping function 
 scraping <- function(Year) {
   the_URL <- paste0('https://fred.stlouisfed.org/release/tables?rid=118&eid=259194&od=', Year, '-01-01#')
   population_website <- read_html(the_URL)
 
-####Scraping data from the given website  
+####Scraping data from the FRED website  
 State <- population_website %>% html_nodes(".fred-rls-elm-nm-td") %>% html_text(trim=T)
 Population <- population_website %>% html_nodes(".fred-rls-elm-nm-td+ .fred-rls-elm-vl-td") %>% html_text(trim=T)
 Year <- population_website %>% html_nodes("#table-unit-subheading1") %>% html_text(trim=T)
@@ -124,11 +124,13 @@ select(State, Pop2009, Pop2019, Pop2021)
 
 # Rationale and Research Questions
 
-Rationale The urgency of climate change, propelled by rising levels of
-CO2 emissions, necessitates a detailed understanding of emission
-sources, patterns, and impact. Energy consumption, particularly the
-burning of fossil fuels for electricity, heat, and transportation, is a
-significant contributor to global CO2 emissions. 
+Energy consumption, particularly the burning of 
+fossil fuels for electricity, heat, and 
+transportation, is a significant contributor to 
+global CO2 emissions. 
+The urgency of climate change, propelled by rising levels of
+CO2 emissions, needs a detailed understanding of emission
+sources, patterns, and impact. 
 
 Understanding these emissions on a granular level, such as by state and sector, 
 is critical for developing effective mitigation strategies. North Carolina, like
@@ -154,11 +156,11 @@ Research Questions
 
 # Dataset Information
 
-The analysis of this paper is an attempt to rationalize why despite of having a few fossil fuel resources, no coal production, and being one of the United States' leading nuclear power-producing states, North Carolina ranked 13 in 2021 in total carbon dioxide (CO2) emissions (US Energy Information Administration -EIA-). We used the data for energy-related carbon dioxide emissions by state and their main sources by sector and fossil fuel, which most recent release was October, 2018.
+The analysis of this paper is an attempt to rationalize why despite of having few fossil fuel resources and no coal production, and being one of the United States' leading nuclear power-producing states, North Carolina ranked 13 in 2021 in total carbon dioxide (CO2) emissions (US Energy Information Administration -EIA-). We used the data for energy-related carbon dioxide emissions by state and their main sources by sector and fossil fuel, which most recent release was October, 2018.
 
-On this regard, the EIA (2023) defines total state CO2 emissions as those that include emissions "from direct fuel use across all sectors, including residential, commercial, industrial, and transportation, as well as primary fuels consumed for electricity generation." On the other hand, energy-related CO2 emissions refers to "emissions released at the location where fossil fuels are combusted". From this information, we would track patterns and define an area of opportunity for the state. We chose the years *2009 and 2019* to analyze changes in emissions' patterns in the decade previous to the Covid-19 pandemic, which could lead to a temporary transformation in the patterns. 
+On this regard, the EIA (2023) defines total state CO2 emissions as those that include emissions "from direct fuel use across all sectors, including residential, commercial, industrial, and transportation, as well as primary fuels consumed for electricity generation." On the other hand, energy-related CO2 emissions refers to "emissions released at the location where fossil fuels are combusted". From this information, we track patterns and define an area of opportunity for the state. We chose the years *2009 and 2019* to analyze changes in emissions' patterns in the decade previous to the Covid-19 pandemic, which could lead to a temporary transformation in the patterns. 
 
-We also define a pair of comparable states in the US in terms of economic growth. To find the most suitable approach for the analysis, we explore the comparison from two perspectives: the first one uses the Gross domestic product (GDP) as indicator, while the second one takes the GDP per capita. In both cases, we see how North Carolina performs as Co2 emissioner when considering its economic size and, then, contrast their emission sources, patterns, and policy interventions. We used the GDP data by state, gathered by USAFacts from the US Bureau of Economic Analysis, while we estimate the State GDP per capita, using that information and the population data was taken from the Federal Reserve Bank of St. Louis (FRED).
+We also define a pair of comparable states in the US in terms of economic growth. To find the most suitable approach for the analysis, we explore the comparison from two perspectives: the first one uses the Gross Domestic Product (GDP) as indicator, while the second one takes the GDP per capita. In both cases, we see how North Carolina performs as CO2 emitter when considering its economic size and, then, contrast their emission sources, patterns, and policy interventions. We used the GDP data by state, gathered by USAFacts from the US Bureau of Economic Analysis, while we estimate the State GDP per capita, using that information and the population data was taken from the Federal Reserve Bank of St. Louis (FRED).
 
 | Data | Source| 
 |------:|:-------|
@@ -173,7 +175,7 @@ We also define a pair of comparable states in the US in terms of economic growth
 
 The Environmental Kuznets Curve (EKC) is the graph representation of the hypothesized relationship between income and environmental degradation as an economy grows. According to it, at early stages of economic growth, environmental degradation, and pollution increase but eventually, the relationship reverts so that at high-income levels the economic growth leads to environmental improvement (Leal, 2022). Thus, the EKC has an inverted U-shaped (figure below).
 
-![Kuznets Curve](./Data/Kuznets-Curve-1.png)
+![Kuznets Curve](./Data/Environmental-Kuznets-Curve.png)
 
 Although this idea has been promoted as a method of improving the environment, EKC faces criticism. One of the drawbacks is that the EKC analysis focuses on the domestic production but overlooks consumption of externally produced goods that could impact on the environmental degradation (Leal, 2022: 1). Besides, as EKC attributes the changes solely to economic growth, omits that other factors, such as "green" regulation, and other policy interventions on human capital, renewable energy consumption, e.p., have to be taken for environmental improvement to happen (Wang et al., 2023).
 
