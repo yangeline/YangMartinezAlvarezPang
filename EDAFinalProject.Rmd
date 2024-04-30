@@ -12,6 +12,10 @@ toc: true
 editor_options:
   chunk_output_type: inline
 ---
+
+\newpage
+\tableofcontents
+
 \newpage
 \listoffigures
 
@@ -226,6 +230,8 @@ print(logGDP_Emissions_2009plot)
 
 Using this indicator, we concluded that Georgia and Virginia could be comparable options, according to the following information:
 
+\newpage
+
 | State| Log GDP| 
 |------:|:-------|
 |Georgia| 26.738 |
@@ -276,6 +282,8 @@ logGDP_pc_States <- GDP_percapita %>%
 StatesGDP_pc_Emission2 <- merge(logGDP_pc_States, State_Emissions_processed, by = "State")
 write.csv(StatesGDP_pc_Emission2, "../YangMartinezAlvarezPang/Data/Processed Data/GDP_pc_Emissions_processed.csv")
 ```
+
+\newpage
 
 ## Comparison through the GDP per capita perspective
 
@@ -521,6 +529,8 @@ print(comparative_plot)
 As shown in the graph above, we can see that, in 2019, Georgia had the highest GDP and CO2 emissions among the three states, followed by North Carolina, and Virginia had the lowest GDP and CO2 emissions. 
 Having drawn comparison in economic well-being and energy-related CO2 emissions between North Carolina, Virginia and Georgia, we will now look at the difference approaches of their climate policies.
 
+\newpage
+
 To briefly compare policy landscape between these states, we will be looking at three parts, whether they have Green House Gas (GHG) emission goals, Climate Action Plans, and how strictly have they been implemented. States that had their Green House Gas (GHG) emission goals written into statute, will be considered to be a more strict policy, and if a state only listed as an executive goal.
 
 ```{r, Ge.bysector, echo=F, error=F, message=FALSE, warning=F, fig.cap= "Georgia. Total CO2 Emissions by sector. 2009-2019",fig.align='center'}
@@ -652,6 +662,7 @@ print(Evol_Co2_byfuel_Vi)
 ```
 Virginia is rapidly increasing its use of natural gas, while decreasing its reliance on coal, a trend that the other states also showed. The only sectors that show this trend are industrial and electric power. Residential and commercial, on the other hand, rely heavily on natural gas, while transportation sources almost all of its fuel from petroleum products.
 
+\newpage
 
 ## Comparison through State Climate Policies
 
