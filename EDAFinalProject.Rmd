@@ -183,7 +183,7 @@ Under this idea that mere economic growth does not drive to enviromental improve
 
 ## Comparison through the GDP perspective
 
-For this analysis, we consider the GDP at current prices. 2009 is our baseline year as we aim to review the decade prior to Covid-19 pandemic, and we used the log transformations to normalize the distribution. From the plot below, we can observe a positive correlation between our variables.
+For this analysis, we consider the GDP at current prices. 2009 is our baseline year as we aim to review the decade prior to Covid-19 pandemic, and we used log transformations to normalize the distribution. From the plot below, we can observe a positive correlation between our variables.
 
 ```{r gdp.comparison1, fig.cap="CO2 Emissions by log GDP. US States 2009", fig.align='center', echo= F, error=F, message=FALSE, warning=FALSE, out.height='45%', out.width='65%'}
 
@@ -359,7 +359,6 @@ Notwithstanding, from the available data, we focus on the CO2 emissions from fue
 From the figure below, we can observe that electric power sector (yellow) and the transportation sector (pink) are the main sources of CO2 emissions in NC, highly above the emissions from residential, commercial and industrial sector. It is worth noting that although the electric power sector shows a downwarding trend in its emissions levels, the transportation sector -in the contrary- has been increasing its emissions.
 
 ```{r Emission.bysector, fig.cap="North Carolina. Total CO2 Emissions by sector. 2009-2019", fig.align='center',echo=F, error=F, message=FALSE, warning=FALSE}
-#colnames(NC_Emissions_csv)
 
 NC_Emissions_bysector <- NC_Emissions_csv %>%
   mutate(Type = str_trim(Type)) %>%
@@ -387,9 +386,9 @@ Evol_Emissions_bysector_NC <- ggplot(NC_Emissions_long, aes(x = Year, y = CO2_Em
   scale_color_discrete(labels = c("Commercial", "Electric Power", "Industrial", "Residential", "Transportation"))
 print(Evol_Emissions_bysector_NC)
 ```
-The EIA explains that truckers who use motor gasoline and diesel fuel on NC heavily used highway system and the jet fuel consumed at Charlotte International Airport, one of the top 10 U.S. airports made that sector an intensive end-use energy-consumer. The internalization of the environmental impacts of this sector should be according to its emissions, and this could be an area of opportunity for the state. 
+The EIA explains that truckers who use motor gasoline and diesel fuel in NC, and the jet fuel consumed at Charlotte International Airport, one of the top 10 U.S. airports, made the transportation sector an intensive end-use energy-consumer. The interstate and internalization of the environmental impacts of this sector should go according to its emissions, and this could be an area of opportunity for the state of NC.
 
-The figures below breaks down each sector's CO2 emission by fuel type. The increase in Co2 emissions from the transportation sector, is driven by the raise in petroleum products. We can observe as well in the bar graph for 2019, that transportations makes a very limited use of other fuel types. In the case of the electric power sector, there is still an opportunity area for reducing the use of coal.
+The figures below break down each sector's CO2 emission by fuel type. The increase in Co2 emissions from the transportation sector, is driven by the raise in petroleum products. We can observe as well in the bar graph for 2019, that transportation makes a very limited use of other fuel types. In the case of the electric power sector, there is still an opportunity area for reducing the use of coal.
 
 ```{r NC.Emission.byfuel, fig.cap= "North Carolina Total CO2 Emissions by sector 2009-2019", fig.align='center', fig.height=10, fig.width=10, echo=F, error=F, message=FALSE, warning=F}
 NC_Emissions_csv$Sector <- factor(NC_Emissions_csv$Sector, levels = c("Commercial Sector", "Industrial Sector", "Residential Sector", "Transportation Sector", "Electric Power Sector", "Fuel Totals"))
@@ -434,10 +433,11 @@ print(byfuel_2019_plot)
 
 ```
 
+\newpage
 
 ## Question 2:\<How do CO2 emissions within states with similar GDP growth compare to North Carolina, and if a stricter state climate policy improves their performances?\>
 
-\newpage
+
 
 ```{r, GDP.CO2.comparables, echo=F, error=F, message=FALSE, warning=F, fig.cap= "CO2 Emissions in 2019 by State and by GDP", fig.align='center'}
 
@@ -471,7 +471,7 @@ emissions_comparison_plot <- ggplot(similar_states_emissions, aes(x = State, y =
 print(emissions_comparison_plot)
 
 ```
-The chart shows a wide disparity in CO2 emissions among the states, indicating that similar economic growth does not necessarily lead to similar levels of emissions. North Carolina appears to be on the lower end of the emissions spectrum relative to states like Georgia and Virginia, which has notably higher emissions. This suggests that North Carolina might be managing its growth in a more emissions-efficient manner compared to the highest emitting states. North Carolina’s position suggests that it is possible to have significant economic growth while maintaining relatively lower CO2 emissions. Investigating the measures that North Carolina has implemented could provide valuable insights into effective strategies for other states. States aiming to reduce their carbon footprint could analyze the energy policies, technological innovations, and regulatory frameworks of lower-emitting states as potential models for sustainable development. States with lower emissions can serve as benchmarks. Understanding their policy frameworks, energy strategies, and technological investments could inform other states’ efforts to decouple economic growth from CO2 emissions.
+The chart shows a wide disparity in CO2 emissions among the states, indicating that similar economic growth does not necessarily lead to similar levels of emissions. North Carolina appears to be on the lower end of the emissions spectrum relative to states like Georgia and Virginia, which have notably higher emissions. This suggests that North Carolina might be managing its growth in a more emission-efficient manner compared to the higher emitting states (Georgia and Virginia). North Carolina’s position suggests that it is possible to have significant economic growth while maintaining relatively lower CO2 emissions. Investigating the measures that North Carolina has implemented could provide valuable insights into effective strategies for other states. States aiming to reduce their carbon footprint could analyze the energy policies, technological innovations, and regulatory frameworks of lower-emitting states as potential models for sustainable development. States with lower emissions can serve as benchmarks. Understanding their policy frameworks, energy strategies, and technological investments could inform other states’ efforts to decouple economic growth from CO2 emissions.
 
 ```{r, echo=F, error=F, message=FALSE, warning=F, fig.cap="Comparison of GDP and CO2 Emissions for 2019", fig.align='center'}
 
@@ -521,7 +521,7 @@ print(comparative_plot)
 As shown in the graph above, we can see that, in 2019, Georgia had the highest GDP and CO2 emissions among the three states, followed by North Carolina, and Virginia had the lowest GDP and CO2 emissions. 
 Having drawn comparison in economic well-being and energy-related CO2 emissions between North Carolina, Virginia and Georgia, we will now look at the difference approaches of their climate policies.
 
-To briefly compare policy landscape between these states, we will be looking at three parts, whether they have Green House Gas (GHG) emission goals, Climate Action Plans, and how strictly have they been implemented. States that had their Green House Gas (GHG) emission goals written into statue, will be considered to be a more strict policy, and if a state only listed as an executive goal.
+To briefly compare policy landscape between these states, we will be looking at three parts, whether they have Green House Gas (GHG) emission goals, Climate Action Plans, and how strictly have they been implemented. States that had their Green House Gas (GHG) emission goals written into statute, will be considered to be a more strict policy, and if a state only listed as an executive goal.
 
 ```{r, Ge.bysector, echo=F, error=F, message=FALSE, warning=F, fig.cap= "Georgia. Total CO2 Emissions by sector. 2009-2019",fig.align='center'}
 
@@ -556,7 +556,7 @@ Evol_CO2_bysector_Ge <- ggplot(Georgia_Emissions_bysector, aes(x = Year, y = CO2
   scale_color_discrete(labels = c("Commercial", "Electric Power", "Industrial", "Residential", "Transportation"))
 print(Evol_CO2_bysector_Ge)
 ```
-In Georgia, similarly to North Carolina breakdowns by sector, we observe that transportation and electric power sector are the main responsible of state CO2 emissions. Notwithstanding, in this case, while the electric power industry has been reducing its emissions levels, the transportation showed little variation in the analyzed decade.
+In Georgia, similar to North Carolina's breakdown by sector, we observe that the transportation and electric power sectors are the main contributors to state CO2 emissions. However, in this case, while the electric power industry has been reducing its emissions levels, transportation has shown little variation over the analyzed decade.
 
 ```{r, Georgia.byfuel, fig.cap= "Georgia. CO2 Emissions in each Sector by fuel type. 2009-2019",fig.height=10, fig.width=10, fig.align='center', echo=F, error=F, message=FALSE, warning=F}
 
@@ -621,7 +621,7 @@ Evol_CO2_bysector_Vi <- ggplot(Virginia_Emissions_bysector, aes(x = Year, y = CO
   scale_color_discrete(labels = c("Commercial", "Electric Power", "Industrial", "Residential", "Transportation"))
 print(Evol_CO2_bysector_Vi)
 ```
-In Virginia...
+In Virginia, similar to Georgia's and North Carolina's breakdown by sector, we observe that the transportation and electric power sectors are the main contributors to state CO2 emissions. The transportation sector has been showing a steady but small growth over the decade, while electric power has remained stagnant, with minor peaks and valleys and an aparent decline from 2016 to 2019.
 
 ```{r, Vi.Emission.byfuel, fig.cap="Virginia. CO2 Emissions in each Sector by fuel type. 2009-2019", fig.align='center',fig.height=10, fig.width=10, echo=F, error=F, message=FALSE, warning=F}
 
@@ -650,6 +650,8 @@ Evol_Co2_byfuel_Vi <- ggplot(Virginia_Emissions_byfuel, aes(x = Year, y = CO2_Em
         axis.text.x = element_text(angle = 90, hjust = 1)) 
 print(Evol_Co2_byfuel_Vi)
 ```
+Virginia is rapidly increasing its use of natural gas, while decreasing its reliance on coal, a trend that the other states also showed. The only sectors that show this trend are industrial and electric power. Residential and commercial, on the other hand, rely heavily on natural gas, while transportation sources almost all of its fuel from petroleum products.
+
 
 ## Comparison through State Climate Policies
 
@@ -702,7 +704,11 @@ At the glance, we can conclude that with less strict climate policies, or not ev
 
 # Summary and Conclusions
 
+The analysis of energy-related CO2 emissions in North Carolina and the US conducted in this study sheds light on crucial insights regarding emission sources, patterns, and impacts. By delving into the primary sources of CO2 emissions in North Carolina, the study reveals the significant role of energy consumption, particularly from fossil fuels used for electricity, heat, and transportation. This granular understanding is essential for developing effective mitigation strategies to address the pressing issue of rising CO2 emissions contributing to climate change. Furthermore, the comparison of CO2 emissions within states with similar GDP growth to North Carolina highlights the importance of state climate policies in influencing emission performances. The study underscores the potential for stricter climate policies to drive improvements in emission levels and environmental outcomes.
 
+Moreover, the analysis underscores the need for actionable insights derived from complex data sets to guide policy interventions and technological innovations in managing CO2 emissions. The study provides a comprehensive assessment of North Carolina's emission landscape within the broader context of the United States. This approach enables the identification of key areas for policy intervention and technological advancements to address the challenges posed by CO2 emissions. The study emphasizes the critical role of detailed analyses at the state and sector levels in formulating effective strategies to mitigate the impact of CO2 emissions on the environment.
+
+In conclusion, by examining emission trends, sources, and policy implications, the analysis contributes valuable insights to the ongoing discourse on environmental sustainability and climate action. The findings underscore the importance of informed decision-making, policy coherence, and collaborative efforts at the state and federal levels to drive meaningful reductions in CO2 emissions and pave the way for a more sustainable and resilient future.
 
 \newpage
 
